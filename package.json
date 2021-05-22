@@ -1,0 +1,49 @@
+{
+  "name": "react-qq-music",
+  "version": "1.0.0",
+  "description": "qqmusic with react",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rayhomie/react-qq-music"
+  },
+  "keywords": [
+    "react",
+    "qqmusic"
+  ],
+  "author": "rayhomie <1572801584@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rayhomie/react-qq-music/issues"
+  },
+  "homepage": "https://github.com/rayhomie/react-qq-music#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "*",
+    "css-loader": "^5.2.5",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "less-loader": "^9.0.0",
+    "mini-css-extract-plugin": "^1.6.0",
+    "postcss-loader": "^5.3.0",
+    "source-map-loader": "^3.0.0",
+    "typescript": "^3.9.9",
+    "url-loader": "^4.1.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
