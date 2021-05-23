@@ -18,6 +18,8 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true,
+    open: true,
+    port: 3000,
     // proxy: {
     //   '/api': {
     //     target: 'http://www.weshineapp.com/',
