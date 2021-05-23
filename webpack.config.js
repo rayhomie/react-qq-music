@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: {
-    index: './src/index.js',//基础配置
+    index: './src/index.js', //基础配置
   },
   /*启用sourcemap:
   开发环境最佳实践：eval-cheap-module-source-map
@@ -31,14 +31,14 @@ module.exports = {
   mode: 'development',
   output: {
     filename: '[name]_[hash].bundle.js',
-    path: path.join(__dirname, 'dist')//打包到的文件夹
+    path: path.join(__dirname, 'dist'), //打包到的文件夹
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
     },
-    modules: [path.resolve(__dirname, "./src/"), "node_modules"]
+    modules: [path.resolve(__dirname, './src/'), 'node_modules'],
     //告诉 webpack 解析模块时应该搜索的目录，即 require 或 import 模块的时候，只写模块名的时候，到哪里去找，其属性值为数组，因为可配置多个模块搜索路径，其搜索路径必须为绝对路径，
   },
   plugins: [
@@ -46,17 +46,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
-      cache: false
+      cache: false,
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].[chunkhash:8].css",
-      chunkFilename: "[id].css"
+      filename: '[name].[chunkhash:8].css',
+      chunkFilename: '[id].css',
     }),
   ],
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -67,56 +67,57 @@ module.exports = {
               [
                 '@babel/preset-env',
                 {
-                  useBuiltIns: 'usage'
-                }
+                  useBuiltIns: 'usage',
+                },
               ],
-              "@babel/preset-react"
-            ]
-          }
+              '@babel/preset-react',
+            ],
+          },
         },
       },
       {
         test: /\.(jpg|jpeg|png)$/,
         exclude: /node_modules/,
-        use: {//使用url-loader，自动把图片转成base64的文件格式
+        use: {
+          //使用url-loader，自动把图片转成base64的文件格式
           loader: 'url-loader',
           options: {
             limit: 100,
-            name: '[name]_[hash].[ext]',//使用原先的文件名和后缀名
-            outputPath: 'images/'//（匹配到的静态图片放到dist目录的imges下）
-          }
+            name: '[name]_[hash].[ext]', //使用原先的文件名和后缀名
+            outputPath: 'images/', //（匹配到的静态图片放到dist目录的imges下）
+          },
         },
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              modules: {
-                localIdentName: '[name][hash:base64:6]'
-              },
-            }
-          },
-          { loader: "postcss-loader" }]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'postcss-loader' }],
       },
       {
         test: /\.less$/,
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader', 'postcss-loader', 'less-loader']
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name][hash:base64:6]',
+              },
+            },
+          },
+          'postcss-loader',
+          'less-loader',
+        ],
       },
       {
         test: /\.(eot|woff|ttf|svg)/,
-        include: [path.resolve(__dirname, 'src/font')],//只处理src下的font文件夹
+        include: [path.resolve(__dirname, 'src/font')], //只处理src下的font文件夹
         use: {
           loader: 'file-loader',
-          options: { outputPath: 'font/' },//打包到dist下的font文件夹
-        }
-      }
-    ]
-  }
+          options: { outputPath: 'font/' }, //打包到dist下的font文件夹
+        },
+      },
+    ],
+  },
 }
