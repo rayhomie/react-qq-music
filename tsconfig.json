@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "noEmit": true,
     "sourceMap": true,
     "allowJs": true,
     "noImplicitAny": true,
@@ -8,7 +8,13 @@
     "target": "es5",
     "jsx": "react",
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "isolatedModules": true,
+    "moduleResolution": "node", // 模块解析与node一致
+    "baseUrl": ".", // paths依赖它
+    "paths": { "@/*": ["./src/*"] } // ts别名
   },
   "include": ["./src/**/*"]
 }

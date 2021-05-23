@@ -11,24 +11,22 @@ module.exports = {
   entry: {
     index: './src/index.js', //基础配置
   },
-  /*启用sourcemap:
-  开发环境最佳实践：eval-cheap-module-source-map
-  生产环境最佳实践：cheap-module-source-map（线上发生错误的时候提示更全面）*/
   devtool: 'eval-cheap-module-source-map',
   devServer: {
     contentBase: './dist',
     hot: true,
     open: true,
     port: 3000,
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://www.weshineapp.com/',
-    //     pathRewrite: {//将/api开头的，'/api'改成'api'
-    //       '^/api': '/api'
-    //     },
-    //     changeOrigin: true//跨域请求
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        target: 'http://qqmusic.rayhomie.icu/',
+        pathRewrite: {
+          //将/api开头的，'/api'改成'api'
+          '^/api': '',
+        },
+        changeOrigin: true, //跨域请求
+      },
+    },
   },
   mode: 'development',
   output: {
@@ -57,8 +55,6 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
-      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -77,6 +73,8 @@ module.exports = {
           },
         },
       },
+      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
       {
         test: /\.(jpg|jpeg|png)$/,
         exclude: /node_modules/,
