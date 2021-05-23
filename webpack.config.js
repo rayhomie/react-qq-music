@@ -49,7 +49,7 @@ module.exports = {
       cache: false,
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash:8].css',
+      filename: '[chunkhash:8].css',
       chunkFilename: '[id].css',
     }),
   ],
@@ -95,20 +95,25 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, path.resolve(__dirname, 'src/style')],
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name][hash:base64:6]',
+                localIdentName: '[hash:base64:8]',
               },
             },
           },
           'postcss-loader',
           'less-loader',
         ],
+      },
+      {
+        test: /\.less$/,
+        include: path.resolve(__dirname, 'src/style'),
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
       },
       {
         test: /\.(eot|woff|ttf|svg)/,

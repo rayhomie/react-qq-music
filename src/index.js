@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Test from '@/Test'
-import '@/style/App.css'
+import App from '@/App'
+import '@/style/App.less'
 
-ReactDOM.render(<Test />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
