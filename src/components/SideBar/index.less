@@ -1,0 +1,35 @@
+@import '@/style/variables.less';
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  .item {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    margin: 5px 30px 5px 30px;
+    height: 30px;
+    border-radius: 4px;
+    align-items: center;
+    color: @menu-item-font-color;
+    div:first-child {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    div:last-child {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    &:hover {
+      background-color: @menu-item-hover-bgcolor;
+      cursor: pointer;
+    }
+    &.click {
+      background-color: @menu-item-active-bgcolor;
+      color: @menu-item-active-font-color;
+    }
+  }
+}

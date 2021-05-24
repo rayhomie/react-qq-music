@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2566083 */
-  src: url('//at.alicdn.com/t/font_2566083_g3x2v9y0i99.woff2?t=1621777613079') format('woff2'),
-       url('//at.alicdn.com/t/font_2566083_g3x2v9y0i99.woff?t=1621777613079') format('woff'),
-       url('//at.alicdn.com/t/font_2566083_g3x2v9y0i99.ttf?t=1621777613079') format('truetype');
+  src: url('//at.alicdn.com/t/font_2566083_s4d1q3vzxb.woff2?t=1621821419887') format('woff2'),
+       url('//at.alicdn.com/t/font_2566083_s4d1q3vzxb.woff?t=1621821419887') format('woff'),
+       url('//at.alicdn.com/t/font_2566083_s4d1q3vzxb.ttf?t=1621821419887') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,38 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-like:before {
+  content: "\e621";
+}
+
+.icon-lastpaly:before {
+  content: "\e6d7";
+}
+
+.icon-download:before {
+  content: "\e633";
+}
+
+.icon-local:before {
+  content: "\e6f6";
+}
+
+.icon-radio:before {
+  content: "\e693";
+}
+
+.icon-music:before {
+  content: "\e630";
+}
+
+.icon-video:before {
+  content: "\e6e7";
+}
+
+.icon-qqmusic:before {
+  content: "\e62f";
 }
 
 .icon-home:before {

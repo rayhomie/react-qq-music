@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/rayhomie/react-qq-music#readme",
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
     "lodash-es": "^4.17.21",
     "normalize.css": "^8.0.1",
     "qs": "^6.7.0",

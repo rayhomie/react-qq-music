@@ -3,4 +3,22 @@
   width: @menu-width;
   height: @menu-height;
   background-color: @menu-bgcolor;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .logo {
+    font-size: 105px;
+    & > svg {
+      width: 2em;
+      height: 0.5em;
+      & > use {
+        transform: scale(2) translate(-57px, -12px);
+      }
+    }
+  }
+  .title {
+    user-select: none;
+    font-size: 12px;
+    color: @menu-title-color;
+    margin: 15px 0 10px 50px;
+  }
 }
