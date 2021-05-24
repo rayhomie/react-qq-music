@@ -16,6 +16,7 @@ module.exports = {
     contentBase: './dist',
     hot: true,
     open: true,
+    historyApiFallback: true,
     port: 3000,
     proxy: {
       '/api': {

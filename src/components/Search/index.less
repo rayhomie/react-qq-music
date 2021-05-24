@@ -1,0 +1,39 @@
+@import '@/style/variables.less';
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: @input-bgcolor;
+  height: @input-height;
+  width: fit-content;
+  padding: @input-padding;
+  border-radius: @input-border-radius;
+  div:first-child {
+    color: #707070;
+    user-select: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  & > input {
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    width: 120px;
+    margin: 0 10px;
+    font-size: 14px;
+    &::-webkit-input-placeholder {
+      color: #9d9d9d;
+      font-size: 12px;
+    }
+  }
+  div:last-child {
+    font-size: 10px;
+    user-select: none;
+    color: #707070;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

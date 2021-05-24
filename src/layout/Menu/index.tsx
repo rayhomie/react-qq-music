@@ -1,22 +1,26 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Icon from '@/components/Icon'
 import MacSwitch from './MacSwitch'
 import OnlineMusic from './OnlineMusic'
 import MyMusic from './MyMusic'
+import { useHistory } from 'react-router-dom'
 import styles from './index.less'
 import CONST from '@/const'
+import { router } from '@/router'
 
 interface MenuProps {}
 
 const Menu: FC<MenuProps> = props => {
-  const [selected, setSelected] = useState<number>(0)
+  const [selected, setSelected] = useState<number>(1)
+  const history = useHistory()
+
   //选择侧边栏
   const handleSelect = (id: number) => {
     setSelected(id)
   }
   //侧边栏变化
   const handleChange = (id: number) => {
-    console.log(id)
+    history.push(router[id])
   }
 
   return (

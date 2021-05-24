@@ -1,0 +1,20 @@
+@import '@/style/variables.less';
+.container {
+  display: flex;
+  & > div {
+    color: @navigation-color;
+    margin: 10px 10px 10px 5px;
+    user-select: none;
+    &:hover {
+      color: @navigation-hover-color;
+      cursor: pointer;
+    }
+  }
+  .disabled {
+    color: @navigation-disabled-color;
+    &:hover {
+      color: @navigation-disabled-color;
+      cursor: not-allowed;
+    }
+  }
+}

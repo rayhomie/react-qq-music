@@ -1,13 +1,46 @@
 import React from 'react'
+import styles from './index.less'
 import { BrowserRouter, Route } from 'react-router-dom'
-import Home from '@/page/Home'
+import Header from '@/layout/Header'
+import Menu from '@/layout/Menu'
+import Player from '@/layout/Player'
+import MusicLab from '@/page/MusicLab'
+import Video from '@/page/Video'
+import Redio from '@/page/Redio'
+import MyLike from '@/page/MyLike'
+import LocalSongs from '@/page/LocalSongs'
+import DownSongs from '@/page/DownSongs'
+import LastPlay from '@/page/LastPlay'
 
 const MyRouter = () => {
   return (
     <BrowserRouter>
-      <Route exact path="/" component={Home}></Route>
+      <Menu />
+      <div className={styles.rightContainer}>
+        <Header />
+        <div className={styles.page}>
+          <Route exact path="/" component={MusicLab}></Route>
+          <Route exact path="/Video" component={Video}></Route>
+          <Route exact path="/Redio" component={Redio}></Route>
+          <Route exact path="/MyLike" component={MyLike}></Route>
+          <Route exact path="/LocalSongs" component={LocalSongs}></Route>
+          <Route exact path="/DownSongs" component={DownSongs}></Route>
+          <Route exact path="/LastPlay" component={LastPlay}></Route>
+        </div>
+        <Player />
+      </div>
     </BrowserRouter>
   )
 }
+export const router = [
+  '',
+  '/',
+  '/Video',
+  '/Redio',
+  '/MyLike',
+  '/LocalSongs',
+  '/DownSongs',
+  '/LastPlay',
+]
 
 export default MyRouter
