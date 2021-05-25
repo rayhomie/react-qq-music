@@ -3,7 +3,7 @@ import Search from '@/components/Search'
 import Navigation from './Navigation'
 import { SearchOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
-import useApp from '@/model/useApp'
+import useApp from '@/model/app/useApp'
 import { router } from '@/router'
 import styles from './index.less'
 

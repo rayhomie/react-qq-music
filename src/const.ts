@@ -12,6 +12,15 @@ const CONST = {
   LAST_PLAY: '最近播放',
   //顶部栏
   SEARCH_MUSIC: '搜索音乐',
+  //推荐
+  SONG_LIST_RECOM: '歌单推荐',
+  NEW_SONG_PUBLISH: '新歌首发',
+  WONDERFULL_RECOM: '精彩推荐',
+  NEW_DISH_PUBLISH: '新碟首发',
+  RANK: '排行榜',
+  MV: 'MV',
+  //音乐馆
+  SINGER: '歌手',
 }
 
 export default CONST

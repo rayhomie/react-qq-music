@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import styles from './index.less'
 import CONST from '@/const'
 import { router } from '@/router'
-import useApp from '@/model/useApp'
+import useApp from '@/model/app/useApp'
 
 interface MenuProps {}
 

@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Header from '@/layout/Header'
 import Menu from '@/layout/Menu'
 import Player from '@/layout/Player'
+import Recommend from '@/page/Recommend'
 import MusicLab from '@/page/MusicLab'
 import Video from '@/page/Video'
 import Redio from '@/page/Redio'
@@ -19,7 +20,8 @@ const MyRouter = () => {
       <div className={styles.rightContainer}>
         <Header />
         <div className={styles.page}>
-          <Route exact path="/" component={MusicLab}></Route>
+          <Route exact path="/" component={Recommend}></Route>
+          <Route exact path="/MusicLab" component={MusicLab}></Route>
           <Route exact path="/Video" component={Video}></Route>
           <Route exact path="/Redio" component={Redio}></Route>
           <Route exact path="/MyLike" component={MyLike}></Route>
@@ -33,8 +35,8 @@ const MyRouter = () => {
   )
 }
 export const router = [
-  '',
   '/',
+  '/MusicLab',
   '/Video',
   '/Redio',
   '/MyLike',

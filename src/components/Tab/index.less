@@ -1,0 +1,32 @@
+@import '@/style/variables.less';
+.container {
+  display: flex;
+  .item {
+    user-select: none;
+    width: 150px;
+    & > div {
+      padding: 10px 0;
+      width: fit-content;
+      &:hover {
+        color: @tab-active-bgcolor;
+        cursor: pointer;
+      }
+    }
+    &.active {
+      & > div {
+        color: @tab-active-bgcolor;
+        padding: 10px 0;
+        width: fit-content;
+        &:after {
+          display: block;
+          content: '';
+          height: @tab-active-line-width;
+          background-color: @tab-active-bgcolor;
+          border-radius: @tab-active-line-width;
+          position: relative;
+          top: 8px;
+        }
+      }
+    }
+  }
+}

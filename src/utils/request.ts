@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://192.168.137.150:3000/api',
   headers: {
     'Content-Type': 'application/json',
     Accept: '*/*',
     Connection: 'keep-alive',
   },
   transformRequest: [
-    (data) => {
+    data => {
       if (!(data instanceof FormData)) {
         data = JSON.stringify(data)
       }
@@ -21,20 +21,20 @@ instance.defaults.timeout = 2500
 
 // http request 拦截器
 instance.interceptors.request.use(
-  async (config) => {
+  async config => {
     return config
   },
-  (err) => {
+  err => {
     return Promise.reject(err)
   }
 )
 
 // http response 拦截器
 instance.interceptors.response.use(
-  (response) => {
+  response => {
     return response
   },
-  (error) => {
+  error => {
     return Promise.reject(error.response.status) // 返回接口返回的错误信息
   }
 )

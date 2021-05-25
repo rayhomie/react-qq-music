@@ -2,12 +2,12 @@ import CONST from '@/const'
 import { DataType } from '@/components/SideBar'
 
 export const dataSource: DataType[] = [
-  // {
-  //   label: CONST['RECOMMEND'],
-  //   id: 0,
-  //   iconfont: 'icon-recommend',
-  //   show: true,
-  // },
+  {
+    label: CONST['RECOMMEND'],
+    id: 0,
+    iconfont: 'icon-recommend',
+    show: true,
+  },
   {
     label: CONST['MUSIC_LAB'],
     id: 1,
