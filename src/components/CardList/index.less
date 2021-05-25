@@ -1,0 +1,23 @@
+@import '@/style/variables.less';
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .cardBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    & > div {
+      & > img {
+        user-select: none;
+        margin: 10px;
+        width: 220px;
+      }
+    }
+  }
+  .icon {
+    font-size: 40px;
+    display: block;
+    height: 40px;
+  }
+}

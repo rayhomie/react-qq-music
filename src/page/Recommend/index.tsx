@@ -22,16 +22,12 @@ const TabMap: any = {
 }
 
 const Recommend: FC<RecommendProps> = props => {
-  const { allRecommend, setAllRecommend } = useRecom()
+  const { setAllRecommend } = useRecom()
   const [active, setActive] = useState<string>('0')
 
   useEffect(() => {
     fetchApi()
   }, [])
-
-  useEffect(() => {
-    console.log(allRecommend)
-  }, [allRecommend])
 
   const fetchApi = async () => {
     const {
