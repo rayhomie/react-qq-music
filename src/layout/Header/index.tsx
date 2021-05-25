@@ -1,16 +1,32 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState, useRef } from 'react'
 import Search from '@/components/Search'
 import Navigation from './Navigation'
 import { SearchOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
+import useApp from '@/model/useApp'
+import { router } from '@/router'
 import styles from './index.less'
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = props => {
-  const [disabled, setDisabled] = useState<[boolean, boolean]>([true, true])
-
+  const { setSideId, setNav } = useApp()
   const history = useHistory()
+
+  useEffect(() => {
+    history.listen(state => {
+      setNav(new Date().getTime())
+      setSideId(router.indexOf(state.pathname))
+    })
+  }, [])
+
+  const onForward = () => {
+    history.goForward()
+  }
+
+  const onBack = () => {
+    history.goBack()
+  }
 
   const onSearch = (value: string) => {
     console.log(value)
@@ -28,24 +44,9 @@ const Header: FC<HeaderProps> = props => {
     console.log(value)
   }
 
-  const onForward = () => {
-    history.goForward()
-    console.log(history)
-  }
-
-  const onBack = () => {
-    if (history.location.pathname !== '/') {
-      setDisabled([false, false])
-      history.goBack()
-    } else {
-      setDisabled([true, false])
-    }
-    console.log(history)
-  }
-
   return (
     <div className={styles.container}>
-      <Navigation disabled={disabled} onForward={onForward} onBack={onBack} />
+      <Navigation onForward={onForward} onBack={onBack} />
       <Search
         prefix={<SearchOutlined />}
         placeholder="搜索音乐"

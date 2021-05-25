@@ -7,20 +7,23 @@ import { useHistory } from 'react-router-dom'
 import styles from './index.less'
 import CONST from '@/const'
 import { router } from '@/router'
+import useApp from '@/model/useApp'
 
 interface MenuProps {}
 
 const Menu: FC<MenuProps> = props => {
-  const [selected, setSelected] = useState<number>(1)
+  const { sideId, setSideId, nav, setNav } = useApp()
   const history = useHistory()
 
   //选择侧边栏
   const handleSelect = (id: number) => {
-    setSelected(id)
+    setSideId(id)
+    setNav(0)
   }
+
   //侧边栏变化
   const handleChange = (id: number) => {
-    history.push(router[id])
+    nav || history.push(router[id])
   }
 
   return (
@@ -28,9 +31,9 @@ const Menu: FC<MenuProps> = props => {
       <MacSwitch />
       <Icon className={styles.logo} type="icon-qqmusic" />
       <div className={styles.title}>{CONST['ONLINE_MUSIC']}</div>
-      <OnlineMusic selected={selected} onSelect={handleSelect} />
+      <OnlineMusic selected={sideId} onSelect={handleSelect} />
       <div className={styles.title}>{CONST['MY_MUSIC']}</div>
-      <MyMusic selected={selected} onSelect={handleSelect} onChange={handleChange} />
+      <MyMusic selected={sideId} onSelect={handleSelect} onChange={handleChange} />
     </div>
   )
 }
