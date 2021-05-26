@@ -20,10 +20,6 @@ interface ListProps {
 }
 
 const List: FC<ListProps> = ({ data, columns, onClickSong, onClickSinger, onClickAlbum }) => {
-  useEffect(() => {
-    console.log(data, columns)
-  }, [data])
-
   const method = useCallback((data, dataIndex, index) => {
     return [
       data[dataIndex],

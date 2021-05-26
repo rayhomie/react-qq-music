@@ -21,7 +21,7 @@ export type getCommentsPayload = {
 }
 
 export type getImageUrlPayload = {
-  id: number //专辑或者歌单请求结果的id
-  size?: number //图片大小, 默认 300x300
+  id: number | string //专辑或者歌单请求结果的id
+  size?: string //图片大小, 默认 300x300
   maxAge?: number //图片过期时间, 默认 12 mins = 2592000ms
 }

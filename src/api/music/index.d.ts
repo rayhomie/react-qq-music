@@ -24,7 +24,7 @@ export type getSingerAlbumPayload = {
 }
 
 export type getSongInfoPayload = {
-  songmid: number //歌曲id
+  songmid: number | string //歌曲id
 }
 export type batchGetSongInfoPayload = {
   songs: string[] //  "songs": [["001CLC7W2Gpz4J"], ["0025NhlN2yWrP4"]]其中 songid可以不传

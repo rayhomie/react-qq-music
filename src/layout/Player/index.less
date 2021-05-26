@@ -3,4 +3,51 @@
   width: @player-width;
   height: @player-height;
   background-color: @player-bgcolor;
+  padding: @player-padding;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  .pic {
+    & > img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin: 0 10px;
+    }
+  }
+  .info {
+    width: @player-info-width;
+    span:last-child {
+      color: #7d7d7d;
+    }
+  }
+  .control {
+    width: @player-control-width;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > i {
+      margin: 5px;
+      &:hover {
+        color: @green;
+        cursor: pointer;
+      }
+    }
+    .circle {
+      font-size: 20px;
+    }
+    .arrow {
+      font-size: 30px;
+    }
+    .play {
+      font-size: 50px;
+      color: @green;
+    }
+    .voice {
+      font-size: 20px;
+    }
+  }
+  .playlist {
+    width: @player-playlist-width;
+  }
 }
