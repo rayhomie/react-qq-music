@@ -12,6 +12,7 @@ import MyLike from '@/page/MyLike'
 import LocalSongs from '@/page/LocalSongs'
 import DownSongs from '@/page/DownSongs'
 import LastPlay from '@/page/LastPlay'
+import SongListDetail from '@/page/Other/SongListDetail'
 
 const MyRouter = () => {
   return (
@@ -28,6 +29,8 @@ const MyRouter = () => {
           <Route exact path="/LocalSongs" component={LocalSongs}></Route>
           <Route exact path="/DownSongs" component={DownSongs}></Route>
           <Route exact path="/LastPlay" component={LastPlay}></Route>
+          {/* other */}
+          <Route exact path="/SongListDetail" component={SongListDetail}></Route>
         </div>
         <Player />
       </div>

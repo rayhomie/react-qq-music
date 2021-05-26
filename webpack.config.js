@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 //单独打包css，不使用style标签，自动使用Link标签
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
   entry: {
@@ -15,7 +16,7 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true,
-    host: '192.168.137.150',
+    // host: '192.168.137.150',
     open: true,
     historyApiFallback: true,
     port: 3000,
@@ -54,6 +55,7 @@ module.exports = {
       filename: '[chunkhash:8].css',
       chunkFilename: '[id].css',
     }),
+    // new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [
@@ -67,6 +69,7 @@ module.exports = {
               [
                 '@babel/preset-env',
                 {
+                  corejs: '3',
                   useBuiltIns: 'usage',
                 },
               ],

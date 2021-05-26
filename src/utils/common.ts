@@ -29,3 +29,31 @@ export function isFullScreen(element: any) {
     element.fullscreenEnabled || element.mozFullScreenEnabled || element.webkitFullscreenEnabled
   )
 }
+
+//数字转单位
+export const numberFormat = function (value: number) {
+  var param = { value: 0, unit: '' }
+  var k = 10000,
+    sizes = ['', '万', '亿', '万亿'],
+    i
+  if (value < k) {
+    param.value = value
+    param.unit = ''
+  } else {
+    i = Math.floor(Math.log(value) / Math.log(k))
+
+    param.value = +(value / Math.pow(k, i)).toFixed(1)
+    param.unit = sizes[i]
+  }
+  return param.value + param.unit
+}
+
+//秒转分钟
+export function s_to_hs(s: number) {
+  let h: number
+  h = Math.floor(s / 60)
+  s = s % 60
+  let ch = (h + '').length == 1 ? '0' + h : h
+  let cs = (s + '').length == 1 ? '0' + s : s
+  return ch + ':' + cs
+}

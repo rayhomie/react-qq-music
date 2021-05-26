@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2566083 */
-  src: url('//at.alicdn.com/t/font_2566083_s4d1q3vzxb.woff2?t=1621821419887') format('woff2'),
-       url('//at.alicdn.com/t/font_2566083_s4d1q3vzxb.woff?t=1621821419887') format('woff'),
-       url('//at.alicdn.com/t/font_2566083_s4d1q3vzxb.ttf?t=1621821419887') format('truetype');
+  src: url('//at.alicdn.com/t/font_2566083_7yn8ohfg4vn.woff2?t=1621952567760') format('woff2'),
+       url('//at.alicdn.com/t/font_2566083_7yn8ohfg4vn.woff?t=1621952567760') format('woff'),
+       url('//at.alicdn.com/t/font_2566083_7yn8ohfg4vn.ttf?t=1621952567760') format('truetype');
 }
 
 .iconfont {
@@ -13,11 +13,107 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-listen:before {
+  content: "\e707";
+}
+
+.icon-toplay:before {
+  content: "\e625";
+}
+
+.icon-toplay-hover:before {
+  content: "\ea92";
+}
+
+.icon-left-arrow:before {
+  content: "\e63b";
+}
+
+.icon-right-arrow:before {
+  content: "\e634";
+}
+
+.icon-shangyishou:before {
+  content: "\e63c";
+}
+
+.icon-xiayishou:before {
+  content: "\e63e";
+}
+
+.icon-mute-full:before {
+  content: "\ea7e";
+}
+
+.icon-soound-min:before {
+  content: "\ea80";
+}
+
+.icon-soound-min-full:before {
+  content: "\ea81";
+}
+
+.icon-sound-max-full:before {
+  content: "\ea82";
+}
+
+.icon-sound-max:before {
+  content: "\ea83";
+}
+
+.icon-pause:before {
+  content: "\ea8c";
+}
+
+.icon-pause-full:before {
+  content: "\ea8d";
+}
+
+.icon-play-full:before {
+  content: "\ea8e";
+}
+
+.icon-play:before {
+  content: "\ea8f";
+}
+
+.icon-stop-full:before {
+  content: "\ea90";
+}
+
+.icon-stop:before {
+  content: "\ea91";
+}
+
+.icon-mute:before {
+  content: "\ea7d";
+}
+
+.icon-hanhan-01-01:before {
+  content: "\e6ae";
+}
+
+.icon-recommend:before {
+  content: "\e631";
+}
+
+.icon-recommend-active:before {
+  content: "\ea20";
+}
+
 .icon-like:before {
   content: "\e621";
 }
 
-.icon-lastpaly:before {
+.icon-like-active:before {
+  content: "\ea21";
+}
+
+.icon-lastplay-active:before {
+  content: "\ea22";
+}
+
+.icon-lastplay:before {
   content: "\e6d7";
 }
 
@@ -29,8 +125,24 @@
   content: "\e6f6";
 }
 
+.icon-download-active:before {
+  content: "\ea23";
+}
+
+.icon-local-active:before {
+  content: "\ea24";
+}
+
 .icon-radio:before {
   content: "\e693";
+}
+
+.icon-radio-active:before {
+  content: "\ea25";
+}
+
+.icon-video-active:before {
+  content: "\ea27";
 }
 
 .icon-music:before {
@@ -39,6 +151,10 @@
 
 .icon-video:before {
   content: "\e6e7";
+}
+
+.icon-music-active:before {
+  content: "\ea26";
 }
 
 .icon-qqmusic:before {

@@ -72,3 +72,24 @@
 @tab-active-bgcolor: @green;
 @tab-active-line-width: 3px;
 
+//cardlist
+@cardlist-item-margin:20px 10px;
+@cardlist-item-margin-top: 20px;
+@cardlist-item-margin-left: 10px;
+@cardlist-item-width: calc((@page-width - @cardlist-item-margin-left * 10 - 140px) / 4);
+@cardlist-img-width: calc(@cardlist-item-width - 30px);
+@cardlist-img-border-radius: 10px;
+@cardlist-icon-width: 40px;
+@cardlist-icon-relative: calc(
+  (@cardlist-item-width + @cardlist-item-margin-top * 4) / 2 + @cardlist-icon-width * 2
+);
+@cardlist-toplay-width: 50px;
+@cardlist-toplay-relative: calc((@cardlist-img-width - @cardlist-toplay-width) / 2);
+@cardlist-toplay-hover-color: #61cca5;
+
+//list
+@list-width: calc(@page-width - 60px - 200px);
+@list-name-width: calc(@list-width * 3 / 7);
+@list-singer-width: calc(@list-width * 4 / 7 * 2 / 5);
+@list-album-width: calc(@list-width * 4 / 7 * 2 / 5);
+@list-interval-width: calc(@list-width * 4 / 7 * 1 / 5);

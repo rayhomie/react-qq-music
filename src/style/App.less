@@ -1,6 +1,7 @@
 @import 'normalize.css';
 @import './variables.less';
 @import '@/font/font.css';
+@import './mixins.less';
 /**
  ** 应用级别的一些样式
  **/
@@ -11,7 +12,7 @@ body {
 
 // 选择器
 ::selection {
-  background-color: @theme-color;
+  background-color: @green;
   color: white;
 }
 
@@ -62,3 +63,9 @@ a {
     color: @theme-color;
   }
 }
+//动画
+.zoom-animation(top, scaleY(0), scaleY(1), center top);
+.zoom-animation(left, scale(0.45, 0.45), scale(1, 1), left);
+.zoom-animation(right, scale(0.45, 0.45), scale(1, 1), right);
+.zoom-animation(bottom, scaleY(0), scaleY(1), center bottom);
+.toplayAnim(toplayAnim, scale(1));

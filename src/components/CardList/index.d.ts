@@ -22,4 +22,8 @@ export type DataType = {
 
 export interface CardListProps {
   data: DataType[]
+  size?: number
+  showListenNum?: boolean
+  onPlay?: (id: number) => void
+  onView?: (id: number) => void
 }

@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.137.150:3000/api',
+  baseURL: 'http://localhost:3000/api',
   headers: {
-    'Content-Type': 'application/json',
-    Accept: '*/*',
-    Connection: 'keep-alive',
+    // 'Content-Type': 'application/json',
+    // Accept: '*/*',
+    // Connection: 'keep-alive',
   },
   transformRequest: [
     data => {
@@ -17,7 +17,7 @@ const instance = axios.create({
   ],
 })
 
-instance.defaults.timeout = 2500
+instance.defaults.timeout = 10000
 
 // http request 拦截器
 instance.interceptors.request.use(
