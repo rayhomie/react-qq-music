@@ -17,9 +17,19 @@ interface ListProps {
   onClickSong?: (id: number) => void
   onClickSinger?: (item: any) => void
   onClickAlbum?: (item: any) => void
+  currentSongId?: string | number
 }
 
-const List: FC<ListProps> = ({ data, columns, onClickSong, onClickSinger, onClickAlbum }) => {
+const List: FC<ListProps> = ({
+  data,
+  columns,
+  onClickSong,
+  onClickSinger,
+  onClickAlbum,
+  currentSongId,
+}) => {
+  const [select, setSelect] = useState<string | number>()
+
   const method = useCallback((data, dataIndex, index) => {
     return [
       data[dataIndex],
@@ -57,10 +67,14 @@ const List: FC<ListProps> = ({ data, columns, onClickSong, onClickSinger, onClic
               >
                 <span
                   onClick={() => {
+                    index === 0 && setSelect(item.mid)
                     onClickSong && index === 0 && onClickSong(item['mid'])
                     onClickSinger && index === 1 && onClickSinger(item[dataIndex])
                     onClickAlbum && index === 2 && onClickAlbum(item[dataIndex])
                   }}
+                  className={classnames({
+                    [styles.select]: select ? select === item.mid : currentSongId === item.mid,
+                  })}
                 >
                   {method(item, dataIndex, index)}
                 </span>
@@ -69,7 +83,7 @@ const List: FC<ListProps> = ({ data, columns, onClickSong, onClickSinger, onClic
           })}
         </div>
       )),
-    [data, columns]
+    [data, columns, select, currentSongId]
   )
 
   return (

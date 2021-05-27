@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { getSongListDetail } from '@/api/songlist'
 import { getSongListDetailPayload } from '@/api/songlist/index.d'
 import List from '@/components/List'
+import usePlayer from '@/model/player/usePlayer'
 import styles from './index.less'
 
 interface SongListDetailProps {}
@@ -10,6 +11,7 @@ interface SongListDetailProps {}
 const SongListDetail: FC<SongListDetailProps> = props => {
   const param = useHistory().location.state as getSongListDetailPayload
   const [songListInfo, setSongListInfo] = useState<any>(null)
+  const { setPlaylist, curSong, setCurSong } = usePlayer()
 
   useEffect(() => {
     fetchApi()
@@ -53,7 +55,8 @@ const SongListDetail: FC<SongListDetailProps> = props => {
         data={songListInfo?.songlist}
         columns={columns}
         onClickSong={id => {
-          console.log(id)
+          setPlaylist(songListInfo?.songlist)
+          setCurSong(id)
         }}
         onClickSinger={id => {
           console.log(id)
@@ -61,6 +64,7 @@ const SongListDetail: FC<SongListDetailProps> = props => {
         onClickAlbum={id => {
           console.log(id)
         }}
+        currentSongId={curSong}
       />
     </div>
   )
