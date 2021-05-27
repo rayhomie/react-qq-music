@@ -1,0 +1,25 @@
+@import '@/style/variables.less';
+.button {
+  width: fit-content;
+  padding: @button-padding;
+  border-radius: @button-border-radius;
+  background-color: @button-default-bgcolor;
+  font-size: @button-font-size;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  &:hover {
+    cursor: pointer;
+    background-color: @button-default-hover-bgcolor;
+  }
+  & > i {
+    margin-right: 5px;
+  }
+  &.primary {
+    background-color: @button-primary-bgcolor;
+    color: @button-primary-font-color;
+    &:hover {
+      background-color: @button-primary-hover-bgcolor;
+    }
+  }
+}

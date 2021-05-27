@@ -10,10 +10,11 @@ interface PlayerProps {}
 const Player: FC<PlayerProps> = props => {
   const [pic, setPic] = useState<string>('')
   const [info, setInfo] = useState<any>(null)
-  const { play, setPlay } = usePlayer()
+  const { play, setPlay, playlist, setPlaylist, curSong, setCurSong } = usePlayer()
+
   useEffect(() => {
-    getSongInfo()
-  }, [])
+    curSong && getSongInfo()
+  }, [curSong])
 
   const getSongInfo = async () => {
     const {
@@ -22,7 +23,7 @@ const Player: FC<PlayerProps> = props => {
           songinfo: { data },
         },
       },
-    } = await fetchSongInfo({ songmid: '000K40UW2j6rXq' })
+    } = await fetchSongInfo({ songmid: curSong })
     setInfo(data)
     const {
       data: {
@@ -41,7 +42,7 @@ const Player: FC<PlayerProps> = props => {
       </div>
       <div className={styles.info}>
         <span>{info?.track_info.name}</span>
-        <span> - {info?.track_info?.singer[0].name}</span>
+        {info && <span> - {info?.track_info?.singer[0].name}</span>}
       </div>
       <div className={styles.control}>
         <i className={classnames('iconfont', 'icon-hanhan-01-01', styles.circle)} />

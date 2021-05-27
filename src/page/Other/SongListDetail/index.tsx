@@ -4,6 +4,7 @@ import { getSongListDetail } from '@/api/songlist'
 import { getSongListDetailPayload } from '@/api/songlist/index.d'
 import List from '@/components/List'
 import usePlayer from '@/model/player/usePlayer'
+import Button from '@/components/Button'
 import styles from './index.less'
 
 interface SongListDetailProps {}
@@ -51,6 +52,19 @@ const SongListDetail: FC<SongListDetailProps> = props => {
 
   return (
     <div>
+      <div className={styles.topBox}>
+        <img src="" alt="" />
+        <div className={styles.rightBox}>
+          <div className={styles.title}></div>
+          <div className={styles.author}></div>
+          <div className={styles.description}></div>
+          <div className={styles.button}>
+            <Button icon="icon-play" type="primary">
+              播放全部
+            </Button>
+          </div>
+        </div>
+      </div>
       <List
         data={songListInfo?.songlist}
         columns={columns}
