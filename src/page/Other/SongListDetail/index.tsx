@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { getSongListDetail } from '@/api/songlist'
 import { getSongListDetailPayload } from '@/api/songlist/index.d'
 import List from '@/components/List'
+import Icon from '@/components/Icon'
 import usePlayer from '@/model/player/usePlayer'
 import Button from '@/components/Button'
 import styles from './index.less'
@@ -24,9 +25,15 @@ const SongListDetail: FC<SongListDetailProps> = props => {
         response: { cdlist },
       },
     } = await getSongListDetail(param)
-    // console.log(cdlist[0])
+    console.log(cdlist[0])
     setSongListInfo(cdlist[0])
   }
+
+  const playAll = () => {
+    setPlaylist(songListInfo?.songlist)
+    setCurSong(songListInfo?.songlist[0]['mid'])
+  }
+
   const columns = [
     {
       title: '歌曲',
@@ -53,18 +60,33 @@ const SongListDetail: FC<SongListDetailProps> = props => {
   return (
     <div>
       <div className={styles.topBox}>
-        <img src="" alt="" />
+        {songListInfo?.logo ? (
+          <img src={songListInfo?.logo} alt="" />
+        ) : (
+          <Icon type="icon-CD" style={{ fontSize: 200 }} />
+        )}
         <div className={styles.rightBox}>
-          <div className={styles.title}></div>
-          <div className={styles.author}></div>
-          <div className={styles.description}></div>
+          <h1 className={styles.title}>{songListInfo?.dissname ? songListInfo?.dissname : '-'}</h1>
+          <div className={styles.author}>
+            {songListInfo?.headurl ? (
+              <img className={styles.headurl} src={songListInfo?.headurl} alt="" />
+            ) : (
+              <Icon className={styles.headurl} type="icon-headpic" />
+            )}
+            <div className={styles.nickname}>{songListInfo?.nickname}</div>
+            {songListInfo?.tags.map(({ name, id }: any) => (
+              <div className={styles.tags} key={id}>{`#${name}`}</div>
+            ))}
+          </div>
+          <div className={styles.description}>{songListInfo?.desc}</div>
           <div className={styles.button}>
-            <Button icon="icon-play" type="primary">
+            <Button icon="icon-play" type="primary" onClick={() => playAll()}>
               播放全部
             </Button>
           </div>
         </div>
       </div>
+      <div className={styles.songNum}>歌曲{songListInfo?.total_song_num}</div>
       <List
         data={songListInfo?.songlist}
         columns={columns}

@@ -28,8 +28,6 @@ const List: FC<ListProps> = ({
   onClickAlbum,
   currentSongId,
 }) => {
-  const [select, setSelect] = useState<string | number>()
-
   const method = useCallback((data, dataIndex, index) => {
     return [
       data[dataIndex],
@@ -67,13 +65,12 @@ const List: FC<ListProps> = ({
               >
                 <span
                   onClick={() => {
-                    index === 0 && setSelect(item.mid)
                     onClickSong && index === 0 && onClickSong(item['mid'])
                     onClickSinger && index === 1 && onClickSinger(item[dataIndex])
                     onClickAlbum && index === 2 && onClickAlbum(item[dataIndex])
                   }}
                   className={classnames({
-                    [styles.select]: select ? select === item.mid : currentSongId === item.mid,
+                    [styles.select]: currentSongId === item.mid,
                   })}
                 >
                   {method(item, dataIndex, index)}
@@ -83,7 +80,7 @@ const List: FC<ListProps> = ({
           })}
         </div>
       )),
-    [data, columns, select, currentSongId]
+    [data, columns, currentSongId]
   )
 
   return (
