@@ -32,6 +32,6 @@ export type batchGetSongInfoPayload = {
 
 export type getMusicPlayPayload = {
   songmid: string //歌曲id, 多个播放链接使用 ,分隔
-  resType: 'play' | 'all' //仅返回播放链接, 默认是 play。[all | play]
-  quality: 'm4a' | '128' | '320' | 'ape' | 'flac' // 播放品质, 默认是 128。[m4a | 128 | 320 | ape | flac]
+  resType?: 'play' | 'all' //仅返回播放链接, 默认是 play。[all | play]
+  quality?: 'm4a' | '128' | '320' | 'ape' | 'flac' // 播放品质, 默认是 128。[m4a | 128 | 320 | ape | flac]
 }
