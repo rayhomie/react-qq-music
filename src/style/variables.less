@@ -58,7 +58,7 @@
 @page-padding-vertical: 10px;
 @page-padding:10px 30px;
 @page-width: calc(100vw - @menu-width);
-@page-height: calc(100vh - @player-height - @header-height);
+@page-height: calc(100vh - @player-height - @header-height - @progress-height);
 @page-bgcolor: @white;
 
 //input
@@ -110,6 +110,9 @@
 
 //progress
 @progress-height: 3px;
+@progress-padding-vertical: 2px;
 @progress-bg-color: #d7d7d7;
 @progress-done-bg-color: @green;
-@progress-width: @player-width;
+@progress-done-height: 3px;
+@progress-width: calc(@player-width - @progress-dot-width);
+@progress-dot-width: 5px;

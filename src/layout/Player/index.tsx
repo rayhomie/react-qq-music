@@ -20,10 +20,6 @@ const Player: FC<PlayerProps> = props => {
   const audio = useRef<any>(null)
 
   useEffect(() => {
-    console.log(progress)
-  }, [progress])
-
-  useEffect(() => {
     play ? audio.current.pause() : audio.current.play()
   }, [play])
 
@@ -68,9 +64,15 @@ const Player: FC<PlayerProps> = props => {
     }
   }
 
+  const modifyProgress = (cur: number) => {
+    const currentTime = cur * audio.current.duration
+    audio.current.currentTime = currentTime
+    setPlay(false)
+  }
+
   return (
     <>
-      <Progress progress={progress} />
+      <Progress progress={progress} onMouseDownProgress={modifyProgress} />
       <div className={styles.container}>
         <div className={styles.pic}>
           {errorImg && pic ? (
