@@ -53,12 +53,13 @@
 @player-info-width: 200px;
 @player-control-width: calc((@player-width - 70px - 60px - 200px) / 2);
 @player-playlist-width: calc((@player-width - 70px - 60px - 200px) / 2);
+@player-playlist-icon-color: #7d7d7d;
 
 //page
 @page-padding-vertical: 10px;
 @page-padding:10px 30px;
 @page-width: calc(100vw - @menu-width);
-@page-height: calc(100vh - @player-height - @header-height - @progress-height);
+@page-height: calc(100vh - @player-height - @header-height - @progress-wrapper-height);
 @page-bgcolor: @white;
 
 //input
@@ -109,6 +110,7 @@
 @button-font-size: 15px;
 
 //progress
+@progress-wrapper-height: 7px;
 @progress-height: 3px;
 @progress-padding-vertical: 2px;
 @progress-bg-color: #d7d7d7;
@@ -116,3 +118,8 @@
 @progress-done-height: 3px;
 @progress-width: calc(@player-width - @progress-dot-width);
 @progress-dot-width: 5px;
+
+//PlayListModal
+@playlistmodal-height: 100vh;
+@playlistmodal-width: 400px;
+@playlistmodal-bgcolor: #fff;

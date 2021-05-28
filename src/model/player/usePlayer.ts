@@ -8,6 +8,8 @@ const usePlayer = () => {
   const [playlist, setPlaylist] = useState<any[]>([])
   // 当前播放歌曲
   const [curSong, setCurSong] = useState<any>(null)
+  //打开播放列表
+  const [openPlaylist, setOpenPlaylist] = useState<boolean>(false)
 
   return {
     play,
@@ -16,6 +18,8 @@ const usePlayer = () => {
     setPlaylist,
     curSong,
     setCurSong,
+    openPlaylist,
+    setOpenPlaylist,
   }
 }
 

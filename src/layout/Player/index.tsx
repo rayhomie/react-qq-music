@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState, useRef } from 'react'
 import { getSongInfo as fetchSongInfo, getMusicPlay as fetchMusicPlay } from '@/api/music'
 import { getImageUrl } from '@/api/recommend'
+import { s_to_hs } from '@/utils/common'
 import Progress from '@/components/Progress'
 import Icon from '@/components/Icon'
 import classnames from 'classnames'
@@ -12,7 +13,7 @@ interface PlayerProps {}
 const Player: FC<PlayerProps> = props => {
   const [pic, setPic] = useState<string>('')
   const [info, setInfo] = useState<any>(null)
-  const { play, setPlay, playlist, setPlaylist, curSong, setCurSong } = usePlayer()
+  const { play, setPlay, playlist, setPlaylist, curSong, setCurSong, setOpenPlaylist } = usePlayer()
   const [errorImg, setErrorImg] = useState<boolean>(false)
   const [musicUrl, setMusicUrl] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
@@ -27,6 +28,9 @@ const Player: FC<PlayerProps> = props => {
     if (curSong) {
       getSongInfo()
       getMusicPlay()
+      setPlay(false)
+    } else {
+      setPlay(true)
     }
   }, [curSong])
 
@@ -70,9 +74,14 @@ const Player: FC<PlayerProps> = props => {
     setPlay(false)
   }
 
+  //音乐结束
+  const musicEnd = () => {
+    setPlay(true)
+  }
+
   return (
     <>
-      <Progress progress={progress} onMouseDownProgress={modifyProgress} />
+      <Progress progress={progress} onControl={modifyProgress} />
       <div className={styles.container}>
         <div className={styles.pic}>
           {errorImg && pic ? (
@@ -98,6 +107,7 @@ const Player: FC<PlayerProps> = props => {
             onTimeUpdate={() =>
               setProgress(audio.current.currentTime / audio.current.duration || 0)
             }
+            onEnded={() => musicEnd()}
           >
             您的浏览器不支持 audio 元素。
           </audio>
@@ -114,7 +124,20 @@ const Player: FC<PlayerProps> = props => {
           <i className={classnames('iconfont', 'icon-xiayishou', styles.arrow)} />
           <i className={classnames('iconfont', 'icon-soound-min', styles.voice)} />
         </div>
-        <div className={styles.playlist}></div>
+        <div className={styles.playlist}>
+          <div className={styles.timeAround}>
+            {audio.current?.currentTime && audio.current?.duration
+              ? `${s_to_hs(audio.current?.currentTime)} / ${s_to_hs(audio.current?.duration)}`
+              : ''}
+          </div>
+          <i
+            className={classnames('iconfont', 'icon-musiclist', styles.musiclist)}
+            onClick={() => {
+              //异步解决ClickOut的Bug
+              setTimeout(() => setOpenPlaylist(pre => !pre), 0)
+            }}
+          />
+        </div>
       </div>
     </>
   )

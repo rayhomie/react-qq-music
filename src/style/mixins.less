@@ -31,7 +31,7 @@
   }
 }
 
-.toplayAnim(
+.toplayAnim(  
   @direction: toplayAnim,
   @scale: scale(1)
 ) {
@@ -50,5 +50,50 @@
     opacity: 0;
     transform: @scale;
     transition: opacity 300ms, transform 300ms;
+  }
+}
+
+.playlistmodal(  
+  @direction: playlistmodal,
+  @delay: 500ms
+) {
+  .@{direction}-appear-done{
+    position:fixed;
+    right: 0;
+    top: 0;
+  }
+  .@{direction}-enter-done{
+    position:fixed;
+    right: 0;
+    top: 0;
+  }
+  .@{direction}-enter { 
+    position:fixed;
+    right: 0;
+    top: 0;
+    // opacity: 0;
+    transform: translateX(400px);
+  }
+  .@{direction}-enter-active {
+    position:fixed;
+    right: 0;
+    top: 0;
+    // opacity: 1;
+    transform: translateX(0);
+    transition: opacity @delay, transform @delay;
+  }
+  .@{direction}-exit {
+    position:fixed;
+    right: 0;
+    top: 0;
+    // opacity: 1;
+  }
+  .@{direction}-exit-active {
+    position:fixed;
+    right: 0;
+    top: 0;
+    // opacity: 0;
+    transform: translateX(400px);
+    transition: opacity @delay, transform @delay;
   }
 }

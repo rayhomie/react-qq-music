@@ -52,8 +52,8 @@ export const numberFormat = function (value: number) {
 export function s_to_hs(s: number) {
   let h: number
   h = Math.floor(s / 60)
-  s = s % 60
+  let ss = (s % 60).toFixed(0)
   let ch = (h + '').length == 1 ? '0' + h : h
-  let cs = (s + '').length == 1 ? '0' + s : s
+  let cs = (ss + '').length == 1 ? '0' + ss : ss
   return ch + ':' + cs
 }

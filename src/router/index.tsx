@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Header from '@/layout/Header'
 import Menu from '@/layout/Menu'
 import Player from '@/layout/Player'
+import MusicListModal from '@/layout/MusicListModal'
 import Recommend from '@/page/Recommend'
 import MusicLab from '@/page/MusicLab'
 import Video from '@/page/Video'
@@ -32,6 +33,7 @@ const MyRouter = () => {
           {/* other */}
           <Route exact path="/SongListDetail" component={SongListDetail}></Route>
         </div>
+        <MusicListModal />
         <Player />
       </div>
     </BrowserRouter>

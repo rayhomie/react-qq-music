@@ -1,22 +1,30 @@
 @import '@/style/variables.less';
-.container {
-  width: @progress-width;
-  height: @progress-height;
-  box-sizing: border-box;
-  background-color: @progress-bg-color;
-  .progress {
+.progress {
+  height: @progress-wrapper-height;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  -webkit-user-drag: none;
+  user-select: none;
+  .container {
+    width: @progress-width;
     height: @progress-height;
-    background-color: @progress-done-bg-color;
-    position: relative;
-    .dot {
-      display: block;
+    box-sizing: border-box;
+    background-color: @progress-bg-color;
+    .progress {
+      height: @progress-height;
       background-color: @progress-done-bg-color;
-      position: absolute;
-      border-radius: @progress-dot-width;
-      width: @progress-dot-width;
-      height: @progress-dot-width;
-      left: 100%;
-      top: calc(50% - @progress-height);
+      position: relative;
+      .dot {
+        display: block;
+        background-color: @progress-done-bg-color;
+        position: absolute;
+        border-radius: @progress-dot-width;
+        width: @progress-dot-width;
+        height: @progress-dot-width;
+        left: 100%;
+        top: calc(50% - @progress-height);
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ import styles from './index.less'
 
 interface ButtonProps {
   children?: React.ReactNode
-  type?: 'primary' | 'default'
+  type?: 'primary' | 'default' | 'simple'
   icon?: string
   style?: React.CSSProperties
   className?: string
