@@ -1,46 +1,71 @@
 import React, { FC, useState, useRef, useEffect, useMemo } from 'react'
+import classnames from 'classnames'
 import useClickOutside from '@/hooks/useClickOutside'
 import Transition from '@/components/Transition'
 import Button from '@/components/Button'
+import Icon from '@/components/Icon'
 import { s_to_hs } from '@/utils/common'
 import styles from './index.less'
 
 interface PlayListModalProps {
   show: boolean
   playlist: any[]
+  curSong?: any
   onClickOutside?: () => void
+  onDoubleClickItem?: (mid: string) => void
+  clearPlaylist?: () => void
 }
 
-const PlayListModal: FC<PlayListModalProps> = ({ show, onClickOutside, playlist }) => {
+const PlayListModal: FC<PlayListModalProps> = ({
+  show,
+  onClickOutside,
+  playlist,
+  curSong,
+  clearPlaylist,
+  onDoubleClickItem,
+}) => {
   const divRef = useRef(null)
+  const curRef = useRef<any>(null)
+  const [errorImg, setErrorImg] = useState<any>({})
 
   useClickOutside(divRef, () => onClickOutside && onClickOutside())
 
-  // useEffect(() => {
-  //   const song = playlist[0]
-  //   console.log(
-  //     song?.name,
-  //     song?.singer[0].name,
-  //     song?.interval,
-  //     `https://y.gtimg.cn/music/photo_new/T002R300x300M000${song?.album.mid}.jpg?max_age=2592000`
-  //   )
-  // }, [playlist])
+  useEffect(() => {
+    //滚动视图
+    curRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }, [curRef.current])
 
   const List = useMemo(
     () =>
       playlist?.map(item => (
-        <div>
-          <img src={`https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`} />
+        <div
+          ref={curSong === item.mid ? curRef : null}
+          className={classnames(styles.item, { [styles.active]: curSong === item.mid })}
+          onDoubleClick={() => onDoubleClickItem && onDoubleClickItem(item.mid)}
+          key={item.id}
+        >
           <div>
-            <div>{item.name}</div>
-            <div>{item.singer[0].name}</div>
+            {errorImg[item.id] ? (
+              <Icon type="icon-CD" style={{ fontSize: 50 }} />
+            ) : (
+              <img
+                src={`https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`}
+                onError={() => {
+                  setErrorImg((pre: any) => ({ ...pre, [`${item.id}`]: true }))
+                }}
+              />
+            )}
+            <div className={styles.info}>
+              <div style={{ fontSize: 14 }}>{item.name}</div>
+              <div style={{ fontSize: 15 }}>{item.singer[0].name}</div>
+            </div>
           </div>
-          <div>
+          <div className={styles.time}>
             <div>{s_to_hs(item.interval)}</div>
           </div>
         </div>
       )),
-    [playlist]
+    [playlist, errorImg, curSong, curRef.current]
   )
 
   return (
@@ -49,14 +74,21 @@ const PlayListModal: FC<PlayListModalProps> = ({ show, onClickOutside, playlist 
         <div className={styles.head}>
           <div className={styles.title}>播放列表</div>
           <div className={styles.bottom}>
-            <div className={styles.songNum}>{`共${playlist?.length}首歌曲`}</div>
+            <div className={styles.songNum}>{`共${
+              playlist?.length ? playlist?.length : 0
+            }首歌曲`}</div>
             <div className={styles.botton}>
               {false && (
                 <Button type="simple" icon="icon-add">
                   添加到
                 </Button>
               )}
-              <Button type="simple" icon="icon-trash">
+              <Button
+                type="simple"
+                icon="icon-trash"
+                style={{ padding: '8px 0 8px 16px' }}
+                onClick={() => clearPlaylist && clearPlaylist()}
+              >
                 清空
               </Button>
             </div>

@@ -30,13 +30,21 @@ const Player: FC<PlayerProps> = props => {
       getMusicPlay()
       setPlay(false)
     } else {
-      setPlay(true)
+      reset()
     }
   }, [curSong])
 
   useEffect(() => {
     setErrorImg(false)
   }, [pic])
+
+  const reset = () => {
+    setMusicUrl('')
+    setPic('')
+    setInfo(null)
+    setPlay(true)
+    setProgress(0)
+  }
 
   const getSongInfo = async () => {
     const {
@@ -137,7 +145,7 @@ const Player: FC<PlayerProps> = props => {
             }}
           >
             <i className={classnames('iconfont', 'icon-musiclist', styles.musiclist)} />
-            <div className={styles.num}>{playlist?.length}</div>
+            <div className={styles.num}>{playlist?.length ? playlist?.length : ''}</div>
           </div>
         </div>
       </div>
