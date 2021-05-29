@@ -55,29 +55,34 @@
 
 .playlistmodal(  
   @direction: playlistmodal,
-  @delay: 500ms
+  @delay: 500ms,
+  @transform: translateX(400px)
 ) {
   .@{direction}-appear-done{
     position:fixed;
     right: 0;
     top: 0;
+    z-index: 999;
   }
   .@{direction}-enter-done{
     position:fixed;
     right: 0;
     top: 0;
+    z-index: 999;
   }
   .@{direction}-enter { 
     position:fixed;
     right: 0;
     top: 0;
+    z-index: 999;
     // opacity: 0;
-    transform: translateX(400px);
+    transform: @transform;
   }
   .@{direction}-enter-active {
     position:fixed;
     right: 0;
     top: 0;
+    z-index: 999;
     // opacity: 1;
     transform: translateX(0);
     transition: opacity @delay, transform @delay;
@@ -86,14 +91,16 @@
     position:fixed;
     right: 0;
     top: 0;
+    z-index: 999;
     // opacity: 1;
   }
   .@{direction}-exit-active {
     position:fixed;
     right: 0;
     top: 0;
+    z-index: 999;
     // opacity: 0;
-    transform: translateX(400px);
+    transform: @transform;
     transition: opacity @delay, transform @delay;
   }
 }

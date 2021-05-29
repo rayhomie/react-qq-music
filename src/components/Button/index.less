@@ -3,23 +3,33 @@
   width: fit-content;
   padding: @button-padding;
   border-radius: @button-border-radius;
-  background-color: @button-default-bgcolor;
   font-size: @button-font-size;
   user-select: none;
   text-align: center;
   vertical-align: middle;
-  &:hover {
-    cursor: pointer;
-    background-color: @button-default-hover-bgcolor;
-  }
   & > i {
     margin-right: 5px;
+  }
+  &.default {
+    background-color: @button-default-bgcolor;
+    &:hover {
+      cursor: pointer;
+      background-color: @button-default-hover-bgcolor;
+    }
   }
   &.primary {
     background-color: @button-primary-bgcolor;
     color: @button-primary-font-color;
     &:hover {
+      cursor: pointer;
       background-color: @button-primary-hover-bgcolor;
+    }
+  }
+  &.simple {
+    color: @button-simple-font-color;
+    &:hover {
+      cursor: pointer;
+      color: @button-simple-hover-font-color;
     }
   }
 }

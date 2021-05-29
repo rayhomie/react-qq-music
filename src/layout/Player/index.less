@@ -60,12 +60,21 @@
       margin-right: 20px;
       font-size: 14px;
     }
-    .musiclist {
-      color: @player-playlist-icon-color;
-      font-size: 20px;
-      &:hover {
-        cursor: pointer;
-        color: @green;
+    & > div {
+      display: flex;
+      align-items: center;
+      user-select: none;
+      .musiclist {
+        color: @player-playlist-icon-color;
+        font-size: 20px;
+        &:hover {
+          cursor: pointer;
+          color: @green;
+        }
+      }
+      .num {
+        margin-left: 5px;
+        color: @player-playlist-icon-color;
       }
     }
   }

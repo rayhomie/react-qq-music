@@ -130,13 +130,15 @@ const Player: FC<PlayerProps> = props => {
               ? `${s_to_hs(audio.current?.currentTime)} / ${s_to_hs(audio.current?.duration)}`
               : ''}
           </div>
-          <i
-            className={classnames('iconfont', 'icon-musiclist', styles.musiclist)}
+          <div
             onClick={() => {
               //异步解决ClickOut的Bug
               setTimeout(() => setOpenPlaylist(pre => !pre), 0)
             }}
-          />
+          >
+            <i className={classnames('iconfont', 'icon-musiclist', styles.musiclist)} />
+            <div className={styles.num}>{playlist?.length}</div>
+          </div>
         </div>
       </div>
     </>

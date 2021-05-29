@@ -1,6 +1,8 @@
 @import '@/style/variables.less';
 
 .container {
+  padding: @playlistmodal-padding;
+  box-sizing: border-box;
   height: @playlistmodal-height;
   width: @playlistmodal-width;
   background-color: @playlistmodal-bgcolor;
@@ -10,17 +12,44 @@
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 99;
+  z-index: 999;
   .head {
     .title {
+      font-size: 22px;
+      margin: 10px 0;
     }
     .bottom {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
       .songNum {
       }
       .botton {
+        display: flex;
+        flex-direction: row;
+        & > div {
+          font-size: 14px;
+        }
       }
     }
   }
   .content {
+    overflow: auto;
+    // 滚动条
+    ::-webkit-scrollbar-track {
+      width: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 0;
+      width: 0;
+    }
   }
 }

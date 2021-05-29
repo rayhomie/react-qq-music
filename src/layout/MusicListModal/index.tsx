@@ -6,13 +6,14 @@ import styles from './index.less'
 interface MusicListModalProps {}
 
 const MusicListModal: FC<MusicListModalProps> = props => {
-  const { openPlaylist, setOpenPlaylist } = usePlayer()
+  const { openPlaylist, setOpenPlaylist, playlist } = usePlayer()
   return (
     <PlayListModal
       show={openPlaylist}
       onClickOutside={() => {
         openPlaylist && setOpenPlaylist(false)
       }}
+      playlist={playlist}
     />
   )
 }
