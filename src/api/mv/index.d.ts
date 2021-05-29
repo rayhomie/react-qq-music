@@ -1,5 +1,5 @@
 export type getMvPlayPayload = {
-  vid: number // video id
+  vid: string | id // video id
 }
 
 export type getSingerMVPayload = {

@@ -1,10 +1,12 @@
-import React, { FC, useEffect, useState, useRef } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Search from '@/components/Search'
 import Navigation from './Navigation'
 import { SearchOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 import useApp from '@/model/app/useApp'
 import { router } from '@/router'
+import { getHotkey as fetchHotkey, getSmartbox as fetchSmartbox } from '@/api/other'
+import { debounce } from '@/utils/common'
 import styles from './index.less'
 
 interface HeaderProps {}
@@ -12,6 +14,7 @@ interface HeaderProps {}
 const Header: FC<HeaderProps> = props => {
   const { setSideId, setNav } = useApp()
   const history = useHistory()
+  const [fetchData, setFetchData] = useState<any>(null)
 
   useEffect(() => {
     history.listen(state => {
@@ -19,6 +22,26 @@ const Header: FC<HeaderProps> = props => {
       setSideId(router.indexOf(state.pathname))
     })
   }, [])
+
+  const getHotkey = async () => {
+    const {
+      data: {
+        response: {
+          data: { hotkey },
+        },
+      },
+    } = await fetchHotkey()
+    setFetchData(hotkey)
+  }
+
+  const getSmartbox = async (value: string) => {
+    const {
+      data: {
+        response: { data },
+      },
+    } = await fetchSmartbox({ key: value })
+    setFetchData(data)
+  }
 
   const onForward = () => {
     history.goForward()
@@ -33,15 +56,7 @@ const Header: FC<HeaderProps> = props => {
   }
 
   const onChange = (value: string) => {
-    console.log(value)
-  }
-
-  const onFocus = (value: string) => {
-    console.log(value)
-  }
-
-  const onBlur = (value: string) => {
-    console.log(value)
+    value ? getSmartbox(value) : getHotkey()
   }
 
   return (
@@ -51,9 +66,10 @@ const Header: FC<HeaderProps> = props => {
         prefix={<SearchOutlined />}
         placeholder="搜索音乐"
         onSearch={onSearch}
-        onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onChange={debounce(onChange, 500)}
+        searchData={fetchData}
+        onFocus={value => (value ? getSmartbox(value) : getHotkey())}
+        onBlur={value => {}}
       />
     </div>
   )

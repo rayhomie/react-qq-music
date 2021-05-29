@@ -1,0 +1,93 @@
+.list {
+  .song {
+    font-size: 12px;
+    padding: 15px 10px;
+    transition: background-color 300ms;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 230px;
+    &:hover {
+      background-color: #f2f2f2;
+      user-select: none;
+      cursor: default;
+    }
+  }
+  .singer {
+    font-size: 12px;
+    padding: 5px 10px;
+    transition: background-color 300ms;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    & > img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      margin-right: 20px;
+    }
+    &:hover {
+      background-color: #f2f2f2;
+      user-select: none;
+      cursor: default;
+    }
+  }
+  .album {
+    font-size: 12px;
+    padding: 5px 10px;
+    transition: background-color 300ms;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:hover {
+      background-color: #f2f2f2;
+      user-select: none;
+      cursor: default;
+    }
+    & > img {
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      & > div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 160px;
+      }
+    }
+  }
+  .mv {
+    font-size: 12px;
+    padding: 5px 10px;
+    transition: background-color 300ms;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:hover {
+      background-color: #f2f2f2;
+      user-select: none;
+      cursor: default;
+    }
+    & > img {
+      width: calc(50px * (64 / 36));
+      height: 50px;
+      margin-right: 20px;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      & > div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 120px;
+      }
+    }
+  }
+}

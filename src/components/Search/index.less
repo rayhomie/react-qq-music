@@ -9,7 +9,8 @@
   width: fit-content;
   padding: @input-padding;
   border-radius: @input-border-radius;
-  div:first-child {
+  position: relative;
+  & > div:first-child {
     color: #707070;
     user-select: none;
     &:hover {
@@ -28,12 +29,63 @@
       font-size: 12px;
     }
   }
-  div:last-child {
+  & > div:nth-child(3) {
     font-size: 10px;
     user-select: none;
     color: #707070;
     &:hover {
       cursor: pointer;
+    }
+  }
+  .resBoard {
+    position: absolute;
+    width: @input-res-board-width;
+    background-color: @input-res-board-bgcolor;
+    box-shadow: @input-res-board-box-shadow;
+    border: 1px solid @input-res-board-border-color;
+    left: 0;
+    top: 120%;
+    z-index: 99;
+    overflow: auto;
+    height: @input-res-board-height;
+    &.show {
+      display: none;
+    }
+    .title {
+      margin: 10px;
+      color: #9b9b9b;
+      font-size: 16px;
+      &:hover {
+        cursor: default;
+      }
+    }
+    .hotkeyItem {
+      padding: 10px;
+      font-size: 14px;
+      transition: background-color 300ms;
+      &:hover {
+        background-color: #f2f2f2;
+        user-select: none;
+        cursor: default;
+      }
+    }
+    .seachItem {
+      .title {
+        margin-top: 10px;
+      }
+      font-size: 14px;
+    }
+    // 滚动条
+    &::-webkit-scrollbar-track {
+      display: none;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      display: none;
     }
   }
 }

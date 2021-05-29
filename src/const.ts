@@ -21,6 +21,14 @@ const CONST = {
   MV: 'MV',
   //音乐馆
   SINGER: '歌手',
+  //搜索框
+  HOTKEY_TITLE: '热门搜索',
+  SMARTBOX_TITLE: {
+    song: '单曲',
+    singer: '歌手',
+    album: '专辑',
+    mv: 'MV',
+  },
 }
 
 export default CONST
