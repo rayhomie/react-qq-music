@@ -35,6 +35,7 @@ module.exports = {
   output: {
     filename: '[name]_[hash].bundle.js',
     path: path.join(__dirname, 'dist'), //打包到的文件夹
+    chunkFilename: '[name].js',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],

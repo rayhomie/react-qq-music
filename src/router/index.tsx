@@ -1,20 +1,32 @@
 import React from 'react'
 import styles from './index.less'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { AsyncComponent } from './AsyncComponent'
 import Header from '@/layout/Header'
 import Menu from '@/layout/Menu'
 import Player from '@/layout/Player'
 import MusicListModal from '@/layout/MusicListModal'
-import Recommend from '@/page/Recommend'
-import MusicLab from '@/page/MusicLab'
+// import Recommend from '@/page/Recommend'
+// import MusicLab from '@/page/MusicLab'
 // import Video from '@/page/Video'
 // import Redio from '@/page/Redio'
 // import MyLike from '@/page/MyLike'
 // import LocalSongs from '@/page/LocalSongs'
 // import DownSongs from '@/page/DownSongs'
 // import LastPlay from '@/page/LastPlay'
-import SongListDetail from '@/page/Other/SongListDetail'
-import CommonSearch from '@/page/Other/CommonSearch'
+// import SongListDetail from '@/page/Other/SongListDetail'
+// import CommonSearch from '@/page/Other/CommonSearch'
+
+const Recommend = AsyncComponent(
+  () => import(/* webpackChunkName: "Recommend" */ '@/page/Recommend')
+)
+const MusicLab = AsyncComponent(() => import(/* webpackChunkName: "MusicLab" */ '@/page/MusicLab'))
+const SongListDetail = AsyncComponent(
+  () => import(/* webpackChunkName: "SongListDetail" */ '@/page/Other/SongListDetail')
+)
+const CommonSearch = AsyncComponent(
+  () => import(/* webpackChunkName: "CommonSearch" */ '@/page/Other/CommonSearch')
+)
 
 const MyRouter = () => {
   return (
