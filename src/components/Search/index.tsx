@@ -42,7 +42,7 @@ const Search: FC<SearchProps> = ({
             key={n}
             onClick={() => {
               setInput(k)
-              onSelect(k, 'hotkey')
+              onSelect(k, 'song')
             }}
           >
             {k}

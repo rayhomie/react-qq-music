@@ -9,14 +9,26 @@ export type DataType = {
 
 export interface TabProps {
   data: DataType[]
+  activeKey?: string
   defaultActiveKey?: string
   onSelect?: (key: string, label?: string) => void
   onChange?: (key: string, label?: string) => void
   itemStyle?: React.CSSProperties
 }
 
-const Tab: FC<TabProps> = ({ data, defaultActiveKey, onSelect, onChange, itemStyle }) => {
+const Tab: FC<TabProps> = ({
+  data,
+  defaultActiveKey,
+  activeKey,
+  onSelect,
+  onChange,
+  itemStyle,
+}) => {
   const [active, setActive] = useState<string>(defaultActiveKey || data[0].key)
+
+  useEffect(() => {
+    activeKey && setActive(activeKey)
+  }, [activeKey])
 
   useEffect(() => {
     onChange && onChange(active, data.find(item => item.key === active)?.label)

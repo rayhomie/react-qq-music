@@ -48,7 +48,7 @@ const Pagination: React.FC<PaginationProps> = props => {
   const generateList = (pageNum: number) => {
     if (cur)
       //cur可能为undefined，默认值为1
-      return new Array(pageNum).fill('').map((item, index) => {
+      return new Array(pageNum)?.fill('')?.map((item, index) => {
         //长度和填充页数相等的数组
         return (
           <>
@@ -134,7 +134,7 @@ const Pagination: React.FC<PaginationProps> = props => {
       >
         {'<'}
       </div>
-      {generateList(pageNum)}
+      {generateList(pageNum > 0 ? pageNum : 1)}
       <div
         className={classnames(styles.item, {
           [styles.disabled]: disabled,

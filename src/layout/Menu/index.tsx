@@ -32,7 +32,7 @@ const Menu: FC<MenuProps> = props => {
       <Icon className={styles.logo} type="icon-qqmusic" />
       <div className={styles.title}>{CONST['ONLINE_MUSIC']}</div>
       <OnlineMusic selected={sideId} onSelect={handleSelect} />
-      <div className={styles.title}>{CONST['MY_MUSIC']}</div>
+      {/* <div className={styles.title}>{CONST['MY_MUSIC']}</div> */}
       <MyMusic selected={sideId} onSelect={handleSelect} onChange={handleChange} />
     </div>
   )

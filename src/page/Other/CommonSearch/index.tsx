@@ -7,6 +7,7 @@ import Tab from '@/components/Tab'
 import Button from '@/components/Button'
 import Pagination from '@/components/Pagination'
 import List from '@/components/List'
+import Card from '@/components/Card'
 import CONST from '@/const'
 import styles from './index.less'
 
@@ -22,6 +23,8 @@ const CommonSearch: FC<CommonSearchProps> = props => {
 
   useEffect(() => {
     const { remoteplace, key } = param
+    setCurrent(1)
+    setTab('song')
     getSearchByKey({ remoteplace, key, page: 1 })
   }, [param])
 
@@ -33,7 +36,7 @@ const CommonSearch: FC<CommonSearchProps> = props => {
     } = await fetchSearchByKey(param)
     setZhidaSinger(data.zhida.zhida_singer)
     setSongListInfo(data.song)
-    console.log(data)
+    console.log(data.song)
   }
 
   const playAll = () => {
@@ -93,7 +96,7 @@ const CommonSearch: FC<CommonSearchProps> = props => {
       <Tab
         data={CONST['TAB_TITLE']}
         itemStyle={{ width: 100, margin: '10px 0' }}
-        defaultActiveKey={param.remoteplace}
+        activeKey={tab}
         onChange={key => onChangeTab(key)}
       />
 
@@ -119,10 +122,28 @@ const CommonSearch: FC<CommonSearchProps> = props => {
           />
         </>
       )}
+      {tab === 'album' && (
+        <Card
+          data={songListInfo?.list.map((item: any) => ({
+            cover: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`,
+            title: item.album.name,
+            content_id: item.album.mid,
+          }))}
+        />
+      )}
+      {/* {tab === 'playlist' && (
+        <Card
+          data={songListInfo?.list.map((item: any) => ({
+            cover: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`,
+            title: item.album.name,
+            content_id: item.album.mid,
+          }))}
+        />
+      )} */}
       <div className={styles.pagination}>
         <Pagination
-          total={songListInfo?.totalnum - 100 || 0}
-          current={current}
+          total={songListInfo?.totalnum - 100}
+          current={current || 1}
           pageSize={10}
           onChange={paginationChange}
         />

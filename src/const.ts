@@ -36,8 +36,8 @@ const CONST = {
   TAB_TITLE: [
     { key: 'song', label: '单曲' },
     { key: 'album', label: '专辑' },
-    { key: 'playlist', label: '歌单' },
-    { key: 'mv', label: 'MV' },
+    // { key: 'playlist', label: '歌单' },
+    // { key: 'mv', label: 'MV' },
   ],
 }
 
