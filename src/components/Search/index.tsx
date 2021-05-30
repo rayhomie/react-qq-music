@@ -14,7 +14,7 @@ interface SearchProps {
   onChange?: (value: string) => void
   onBlur?: (value: string) => void
   onFocus?: (value: string) => void
-  onSelect?: (res: string, type: string) => void
+  onSelect?: (res: string, type: string, id?: string) => void
 }
 
 const Search: FC<SearchProps> = ({
@@ -73,9 +73,9 @@ const Search: FC<SearchProps> = ({
                   input={input}
                   type={item[0]}
                   data={item[1]['itemlist']}
-                  onSelect={(res, type) => {
+                  onSelect={(res, type, id) => {
                     setInput(res)
-                    onSelect(res, type)
+                    onSelect(res, type, id)
                   }}
                 />
               }

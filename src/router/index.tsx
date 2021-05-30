@@ -16,6 +16,8 @@ import MusicListModal from '@/layout/MusicListModal'
 // import LastPlay from '@/page/LastPlay'
 // import SongListDetail from '@/page/Other/SongListDetail'
 // import CommonSearch from '@/page/Other/CommonSearch'
+// import Album from '@/page/Other/Album'
+// import Singer from '@/page/Other/Singer'
 
 const Recommend = AsyncComponent(
   () => import(/* webpackChunkName: "Recommend" */ '@/page/Recommend')
@@ -27,6 +29,8 @@ const SongListDetail = AsyncComponent(
 const CommonSearch = AsyncComponent(
   () => import(/* webpackChunkName: "CommonSearch" */ '@/page/Other/CommonSearch')
 )
+const Album = AsyncComponent(() => import(/* webpackChunkName: "Album" */ '@/page/Other/Album'))
+const Singer = AsyncComponent(() => import(/* webpackChunkName: "Singer" */ '@/page/Other/Singer'))
 
 const MyRouter = () => {
   return (
@@ -46,6 +50,8 @@ const MyRouter = () => {
           {/* other */}
           <Route exact path="/SongListDetail" component={SongListDetail}></Route>
           <Route exact path="/CommonSearch" component={CommonSearch}></Route>
+          <Route exact path="/Album" component={Album}></Route>
+          <Route exact path="/Singer" component={Singer}></Route>
         </div>
         <MusicListModal />
         <Player />
@@ -67,8 +73,8 @@ export const router = [
 export const searchTab = {
   song: '/CommonSearch',
   hotkey: '/CommonSearch',
-  album: '/',
-  singer: '/',
+  album: '/Album',
+  singer: '/Singer',
   mv: '/',
 }
 

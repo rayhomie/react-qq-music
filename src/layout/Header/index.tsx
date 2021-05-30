@@ -69,9 +69,8 @@ const Header: FC<HeaderProps> = props => {
         onChange={debounce(onChange, 500)}
         searchData={fetchData}
         onFocus={value => (value ? getSmartbox(value) : getHotkey())}
-        onSelect={(res, type) => {
-          history.push((searchTab as any)[type], { key: res, remoteplace: type })
-          console.log(res, type)
+        onSelect={(res, type, id) => {
+          history.push((searchTab as any)[type], { key: res, remoteplace: type, mid: id })
         }}
       />
     </div>

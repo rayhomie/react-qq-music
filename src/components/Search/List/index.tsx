@@ -6,7 +6,7 @@ interface ListProps {
   type: any
   data: any[]
   input?: string
-  onSelect?: (res: string, type: string) => void
+  onSelect?: (res: string, type: string, id?: string) => void
 }
 
 const List: FC<ListProps> = ({ data, type, onSelect = () => {}, input = '' }) => {
@@ -74,7 +74,7 @@ const List: FC<ListProps> = ({ data, type, onSelect = () => {}, input = '' }) =>
         <div
           key={item.id}
           className={styles[type]}
-          onClick={() => onSelect(`${item.name} ${item.singer}`, 'album')}
+          onClick={() => onSelect(`${item.name} ${item.singer}`, 'album', `${item.mid}`)}
         >
           <img src={item.pic} />
           <div className={styles.right}>
@@ -92,7 +92,7 @@ const List: FC<ListProps> = ({ data, type, onSelect = () => {}, input = '' }) =>
         <div
           key={item.id}
           className={styles[type]}
-          onClick={() => onSelect(`${item.name}`, 'singer')}
+          onClick={() => onSelect(`${item.name}`, 'singer', `${item.mid}`)}
         >
           <img src={item.pic} />
           <div>{highlight(item.name, input)}</div>
