@@ -12,9 +12,10 @@ export interface TabProps {
   defaultActiveKey?: string
   onSelect?: (key: string, label?: string) => void
   onChange?: (key: string, label?: string) => void
+  itemStyle?: React.CSSProperties
 }
 
-const Tab: FC<TabProps> = ({ data, defaultActiveKey, onSelect, onChange }) => {
+const Tab: FC<TabProps> = ({ data, defaultActiveKey, onSelect, onChange, itemStyle }) => {
   const [active, setActive] = useState<string>(defaultActiveKey || data[0].key)
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const Tab: FC<TabProps> = ({ data, defaultActiveKey, onSelect, onChange }) => {
             className={classnames(styles.item, {
               [styles.active]: active === key,
             })}
+            style={itemStyle}
           >
             <div onClick={() => click(key, label)}>{label}</div>
           </div>

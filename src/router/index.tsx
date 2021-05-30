@@ -14,6 +14,7 @@ import LocalSongs from '@/page/LocalSongs'
 import DownSongs from '@/page/DownSongs'
 import LastPlay from '@/page/LastPlay'
 import SongListDetail from '@/page/Other/SongListDetail'
+import CommonSearch from '@/page/Other/CommonSearch'
 
 const MyRouter = () => {
   return (
@@ -32,6 +33,7 @@ const MyRouter = () => {
           <Route exact path="/LastPlay" component={LastPlay}></Route>
           {/* other */}
           <Route exact path="/SongListDetail" component={SongListDetail}></Route>
+          <Route exact path="/CommonSearch" component={CommonSearch}></Route>
         </div>
         <MusicListModal />
         <Player />
@@ -49,5 +51,12 @@ export const router = [
   '/DownSongs',
   '/LastPlay',
 ]
+
+export const searchTab = {
+  song: '/CommonSearch',
+  album: '/',
+  singer: '/',
+  mv: '/',
+}
 
 export default MyRouter

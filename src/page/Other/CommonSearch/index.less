@@ -1,0 +1,49 @@
+@import '@/style/variables.less';
+.title {
+  font-size: 24px;
+  width: 50vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  & > span {
+    color: @green;
+  }
+  &:hover {
+    user-select: none;
+    cursor: default;
+  }
+}
+.singerlan {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px;
+  & > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    -webkit-user-drag: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  & > div {
+    margin-left: 20px;
+    font-size: 16px;
+    &:hover {
+      cursor: pointer;
+      color: @green;
+    }
+  }
+}
+.itemTab {
+  width: 100px;
+}
+
+.pagination {
+  width: @list-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}

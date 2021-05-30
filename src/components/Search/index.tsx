@@ -94,6 +94,7 @@ const Search: FC<SearchProps> = ({
           onClick={() => {
             input !== pre && onSearch(input)
             setPre(input)
+            setShowResBoard(false)
           }}
         >
           {prefix}
@@ -107,12 +108,14 @@ const Search: FC<SearchProps> = ({
               setPre(prev)
               return e.target.value
             })
+            setShowResBoard(true)
             onChange(e.target.value)
           }}
           onKeyDown={e => {
             if (e.key === 'Enter' && input !== pre) {
               onSearch(input)
               setPre(input)
+              setShowResBoard(false)
             }
           }}
           onBlur={e => {

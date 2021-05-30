@@ -28,7 +28,17 @@ const CONST = {
     singer: '歌手',
     album: '专辑',
     mv: 'MV',
+    playlist: '歌单',
+    user: '用户',
+    lyric: '歌词',
   },
+  //COMMON搜索页面
+  TAB_TITLE: [
+    { key: 'song', label: '单曲' },
+    { key: 'album', label: '专辑' },
+    { key: 'playlist', label: '歌单' },
+    { key: 'mv', label: 'MV' },
+  ],
 }
 
 export default CONST
