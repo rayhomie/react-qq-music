@@ -69,7 +69,9 @@ const Header: FC<HeaderProps> = props => {
         onChange={debounce(onChange, 500)}
         searchData={fetchData}
         onFocus={value => (value ? getSmartbox(value) : getHotkey())}
-        onBlur={value => {}}
+        onSelect={(res, type) => {
+          console.log(res, type)
+        }}
       />
     </div>
   )

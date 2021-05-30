@@ -5,9 +5,11 @@ import styles from './index.less'
 interface ListProps {
   type: any
   data: any[]
+  input?: string
+  onSelect?: (res: string, type: string) => void
 }
 
-const List: FC<ListProps> = ({ data, type }) => {
+const List: FC<ListProps> = ({ data, type, onSelect = () => {}, input = '' }) => {
   //没有pic的data
   const [mvData, setMvData] = useState<any[]>([])
   const [reqMvInfo, setReqMvInfo] = useState<any[]>([])
@@ -43,53 +45,78 @@ const List: FC<ListProps> = ({ data, type }) => {
     setReqMvInfo(pre => [...pre, { pic: item[0].cover_pic, vid: item[0].vid }])
   }
 
+  const highlight = (value: string, input: string) => {
+    return value.split(input).map(item => (
+      <>
+        <span>{item}</span>
+        <span className={styles.highlight}>{input}</span>
+      </>
+    ))
+  }
+
   const song = useMemo(
     () =>
       data?.map((item: any) => (
-        <div key={item.id} className={styles[type]}>
-          {item.name} - {item.singer}
+        <div
+          key={item.id}
+          className={styles[type]}
+          onClick={() => onSelect(`${item.name} ${item.singer}`, 'song')}
+        >
+          {highlight(`${item.name} - ${item.singer}`, input)}
         </div>
       )),
-    [data, type]
+    [data, type, input]
   )
 
   const album = useMemo(
     () =>
       data?.map((item: any) => (
-        <div key={item.id} className={styles[type]}>
+        <div
+          key={item.id}
+          className={styles[type]}
+          onClick={() => onSelect(`${item.name} ${item.singer}`, 'album')}
+        >
           <img src={item.pic} />
           <div className={styles.right}>
-            <div>{item.name}</div>
-            <div>{item.singer}</div>
+            <div>{highlight(item.name, input)}</div>
+            <div>{highlight(item.singer, input)}</div>
           </div>
         </div>
       )),
-    [data, type]
+    [data, type, input]
   )
 
   const singer = useMemo(
     () =>
       data?.map((item: any) => (
-        <div key={item.id} className={styles[type]}>
+        <div
+          key={item.id}
+          className={styles[type]}
+          onClick={() => onSelect(`${item.name}`, 'singer')}
+        >
           <img src={item.pic} />
-          <div>{item.name}</div>
+          <div>{highlight(item.name, input)}</div>
         </div>
       )),
-    [data, type]
+    [data, type, input]
   )
 
   const mv = useMemo(
     () =>
       renderMv?.map((item: any) => (
-        <div key={`${item.id}`} className={styles[type]}>
+        <div
+          key={`${item.id}`}
+          className={styles[type]}
+          onClick={() => onSelect(`${item.name} ${item.singer}`, 'mv')}
+        >
           <img src={item.pic} />
           <div className={styles.right}>
-            <div>{item.name}</div>
-            <div>{item.singer}</div>
+            <div>{highlight(item.name, input)}</div>
+            <div>{highlight(item.singer, input)}</div>
           </div>
         </div>
       )),
-    [renderMv]
+    [renderMv, input]
   )
 
   const render = useCallback(
@@ -97,7 +124,7 @@ const List: FC<ListProps> = ({ data, type }) => {
       //@ts-ignore
       return { song: song, album: album, mv: mv, singer: singer }[`${type}`]
     },
-    [data, type, renderMv]
+    [data, type, renderMv, input]
   )
 
   return <div className={styles.list}>{render(type)}</div>

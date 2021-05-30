@@ -14,7 +14,7 @@ interface SearchProps {
   onChange?: (value: string) => void
   onBlur?: (value: string) => void
   onFocus?: (value: string) => void
-  onSelect?: (value: string) => void
+  onSelect?: (res: string, type: string) => void
 }
 
 const Search: FC<SearchProps> = ({
@@ -41,7 +41,8 @@ const Search: FC<SearchProps> = ({
             className={styles.hotkeyItem}
             key={n}
             onClick={() => {
-              onSelect(k)
+              setInput(k)
+              onSelect(k, 'hotkey')
             }}
           >
             {k}
@@ -67,7 +68,17 @@ const Search: FC<SearchProps> = ({
           .map((item: any) => (
             <div key={item[0]} className={styles.seachItem}>
               <div className={styles.title}>{(CONST['SMARTBOX_TITLE'] as any)[item[0]]}</div>
-              {<List type={item[0]} data={item[1]['itemlist']} />}
+              {
+                <List
+                  input={input}
+                  type={item[0]}
+                  data={item[1]['itemlist']}
+                  onSelect={(res, type) => {
+                    setInput(res)
+                    onSelect(res, type)
+                  }}
+                />
+              }
             </div>
           ))
       ) : (
@@ -105,8 +116,10 @@ const Search: FC<SearchProps> = ({
             }
           }}
           onBlur={e => {
-            setShowResBoard(false)
-            onBlur(e.target.value)
+            setTimeout(() => {
+              setShowResBoard(false)
+              onBlur(e.target.value)
+            }, 200)
           }}
           onFocus={e => {
             setShowResBoard(true)
