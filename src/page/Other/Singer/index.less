@@ -1,0 +1,68 @@
+.container {
+  padding: 0 20px;
+  .singerInfo {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    .img {
+      width: 200px;
+      height: 200px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .right {
+      margin-left: 50px;
+      .name {
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .simpledesc {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 30px 0;
+        font-size: 14px;
+      }
+      .fans {
+        font-size: 12px;
+        color: #7d7d7d;
+      }
+    }
+  }
+
+  .song {
+  }
+
+  .album {
+  }
+  .singer {
+    .title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 10px;
+      span {
+        margin-right: 20px;
+        font-size: 24px;
+      }
+      .left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+  }
+
+  .desc {
+    .title {
+      margin: 20px 10px;
+      font-size: 16px;
+    }
+    .content {
+      margin: 10px;
+      line-height: 2em;
+      color: #7d7d7d;
+    }
+  }
+}

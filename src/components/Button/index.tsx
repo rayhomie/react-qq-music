@@ -4,7 +4,7 @@ import styles from './index.less'
 
 interface ButtonProps {
   children?: React.ReactNode
-  type?: 'primary' | 'default' | 'simple'
+  type?: 'primary' | 'default' | 'simple' | 'more'
   icon?: string
   style?: React.CSSProperties
   className?: string
@@ -27,8 +27,9 @@ const Button: FC<ButtonProps> = ({
       style={style}
       onClick={onClick}
     >
-      {icon && <i className={`iconfont ${icon}`} />}
+      {icon && type !== 'more' && <i className={`iconfont ${icon}`} />}
       {children}
+      {icon && type === 'more' && <i className={`iconfont ${icon}`} />}
     </div>
   )
 }

@@ -57,3 +57,28 @@ export function s_to_hs(s: number) {
   let cs = (ss + '').length == 1 ? '0' + ss : ss
   return ch + ':' + cs
 }
+
+//提取xml – CDATA内容
+export function XML_CDATA(data: string) {
+  const regExp = /<!\[CDATA\[((.|\n)*?)\]\]>/g
+  // const filt = {
+  //   荣誉记录: true,
+  //   从艺历程: true,
+  // }
+  const res = data
+    .match(regExp)
+    ?.map(item => item.slice(9, -3))
+    // .filter(item => !(filt as any)[item])
+    .reduce((pre, cur, index) => {
+      if (!(index % 2)) {
+        ;(pre[(index / 2) | 0] as any) = []
+        ;(pre[(index / 2) | 0] as any).push(cur)
+        return pre
+      } else {
+        ;(pre[(index / 2) | 0] as any).push(cur)
+        return pre
+      }
+    }, [])
+
+  return res
+}

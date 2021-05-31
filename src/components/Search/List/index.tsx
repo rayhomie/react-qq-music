@@ -46,10 +46,11 @@ const List: FC<ListProps> = ({ data, type, onSelect = () => {}, input = '' }) =>
   }
 
   const highlight = (value: string, input: string) => {
-    return value.split(input).map((item, _) => (
+    const data = value.split(input)
+    return data.map((item, _) => (
       <span key={_}>
         <span>{item}</span>
-        <span className={styles.highlight}>{input}</span>
+        {_ !== data.length - 1 && <span className={styles.highlight}>{input}</span>}
       </span>
     ))
   }
