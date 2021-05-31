@@ -79,7 +79,7 @@ const Singer: FC<SingerProps> = props => {
   }
 
   //获取专辑
-  const fetchSingerAlbum = async (param: any, current: number, limit: number = 10) => {
+  const fetchSingerAlbum = async (param: any, current: number, limit: number = 8) => {
     const { mid } = param
     const {
       data: {
@@ -173,17 +173,7 @@ const Singer: FC<SingerProps> = props => {
         activeKey={tab}
         onChange={key => onChangeTab(key)}
       />
-      {tab === 'desc' && (
-        <div className={styles.desc}>
-          <div className={styles.content}>{desc?.[0][1]}</div>
-          <div className={styles.title}>基本资料</div>
-          {desc?.slice(1, desc.length)?.map((item: any, _: number) => (
-            <div className={styles.content} key={_}>
-              {item[0]}：{item[1]}
-            </div>
-          ))}
-        </div>
-      )}
+
       {tab === 'singer' && (
         <div className={styles.singer}>
           <div className={styles.title}>
@@ -225,6 +215,7 @@ const Singer: FC<SingerProps> = props => {
               content_id: item.albumMid,
             }))}
           />
+
           {similarSinger && (
             <>
               <div className={styles.title}>
@@ -240,7 +231,58 @@ const Singer: FC<SingerProps> = props => {
           )}
         </div>
       )}
-      {tab === 'album' && <div className={styles.album}></div>}
+
+      {tab === 'song' && (
+        <div className={styles.song}>
+          <Button
+            icon="icon-play"
+            type="default"
+            style={{ margin: '10px 0 20px 10px' }}
+            onClick={() => playAll()}
+          >
+            播放全部
+          </Button>
+          <List
+            data={singerInfo?.songlist}
+            columns={columns}
+            onClickSong={id => {
+              setPlaylist(singerInfo?.songlist)
+              setCurSong(id)
+            }}
+            onClickSinger={id => {
+              console.log(id)
+            }}
+            onClickAlbum={id => {
+              console.log(id)
+            }}
+            currentSongId={curSong}
+          />
+        </div>
+      )}
+
+      {tab === 'album' && (
+        <div className={styles.album}>
+          <Card
+            data={album?.albumList.map((item: any) => ({
+              cover: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.albumMid}.jpg`,
+              title: item.albumName,
+              content_id: item.albumMid,
+            }))}
+          />
+        </div>
+      )}
+
+      {tab === 'desc' && (
+        <div className={styles.desc}>
+          <div className={styles.content}>{desc?.[0][1]}</div>
+          <div className={styles.title}>基本资料</div>
+          {desc?.slice(1, desc.length)?.map((item: any, _: number) => (
+            <div className={styles.content} key={_}>
+              {item[0]}：{item[1]}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
