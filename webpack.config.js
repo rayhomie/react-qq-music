@@ -1,25 +1,29 @@
 const path = require('path')
 
+const webpack = require('webpack')
 //生成一个html模板
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //启动时清空dist文件夹
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 //单独打包css，不使用style标签，自动使用Link标签
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
+const ENV = process.env.NODE_ENV
 module.exports = {
   entry: {
     index: './src/index.js', //基础配置
   },
-  devtool: 'eval-cheap-module-source-map',
+  ...(ENV === 'production' ? {} : { devtool: 'eval-cheap-module-source-map' }),
   devServer: {
     contentBase: './dist',
     hot: true,
-    // host: '192.168.137.150',
+    // host: '0.0.0.0',
     open: true,
     historyApiFallback: true,
-    port: 3000,
+    port: 3333,
     proxy: {
       '/api': {
         target: 'http://qqmusic.rayhomie.icu/',
@@ -56,8 +60,15 @@ module.exports = {
       filename: '[chunkhash:8].css',
       chunkFilename: '[id].css',
     }),
-    // new BundleAnalyzerPlugin(),
+    new webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, 'dll', 'react.manifest.json'),
+    }),
+    new BundleAnalyzerPlugin(),
   ],
+  optimization: {
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+    ...(ENV === 'production' ? { minimize: true } : {}),
+  },
   module: {
     rules: [
       {
