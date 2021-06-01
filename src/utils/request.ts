@@ -2,7 +2,9 @@ import axios from 'axios'
 
 const instance = axios.create({
   baseURL:
-    process.env.NODE_ENV === 'production' ? 'http://localhost:3333' : 'http://localhost:3333/api',
+    process.env.NODE_ENV === 'production'
+      ? 'http://music.rayhomie.icu'
+      : 'http://localhost:3333/api',
   headers: {
     // 'Content-Type': 'application/json',
     // Accept: '*/*',
