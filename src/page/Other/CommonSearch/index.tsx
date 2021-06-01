@@ -89,9 +89,21 @@ const CommonSearch: FC<CommonSearchProps> = props => {
       {zhidaSinger && (
         <div className={styles.singerlan}>
           <img src={zhidaSinger.singerPic} />
-          <div>歌手：{zhidaSinger.singerName}</div>
-          <div>单曲 {zhidaSinger.songNum}</div>
-          <div>专辑 {zhidaSinger.albumNum}</div>
+          <div
+            onClick={() => history.push('/Singer', { remoteplace: 'singer', mid: zhidaSinger.singerMID })}
+          >
+            歌手：{zhidaSinger.singerName}
+          </div>
+          <div
+            onClick={() => history.push('/Singer', { remoteplace: 'song', mid: zhidaSinger.singerMID })}
+          >
+            单曲 {zhidaSinger.songNum}
+          </div>
+          <div
+            onClick={() => history.push('/Singer', { remoteplace: 'album', mid: zhidaSinger.singerMID })}
+          >
+            专辑 {zhidaSinger.albumNum}
+          </div>
         </div>
       )}
       <Tab
@@ -114,7 +126,7 @@ const CommonSearch: FC<CommonSearchProps> = props => {
               setCurSong(id)
             }}
             onClickSinger={id => {
-              history.push('/Singer', { remoteplace: 'singer', mid: id[0].mid })
+              history.push('/Singer', { remoteplace: 'singer', mid: id })
             }}
             onClickAlbum={id => {
               console.log(id)

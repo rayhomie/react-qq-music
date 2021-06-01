@@ -5,7 +5,8 @@ import styles from './index.less'
 interface AlbumProps {}
 
 const Album: FC<AlbumProps> = props => {
-  const param = useHistory().location.state as any
+  const history = useHistory()
+  const param = history.location.state as any
   return <div>Album</div>
 }
 

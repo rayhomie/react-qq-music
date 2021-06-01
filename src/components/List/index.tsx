@@ -14,7 +14,7 @@ type DataType = { key?: string } & any
 interface ListProps {
   data: DataType[]
   columns: Columns[]
-  onClickSong?: (id: number) => void
+  onClickSong?: (id: any) => void
   onClickSinger?: (item: any) => void
   onClickAlbum?: (item: any) => void
   currentSongId?: string | number
@@ -31,7 +31,13 @@ const List: FC<ListProps> = ({
   const method = useCallback((data, dataIndex, index) => {
     return [
       data[dataIndex],
-      data[dataIndex]?.[0]?.name,
+      dataIndex === 'singer' &&
+        data[dataIndex]?.map(({ name, mid }: any, _: number) => (
+          <span key={_}>
+            <span onClick={() => onClickSinger && onClickSinger(mid)}>{name}</span>
+            {data[dataIndex].length !== 1 && _ !== data[dataIndex].length - 1 ? ' / ' : ''}
+          </span>
+        )),
       data[dataIndex]?.name,
       s_to_hs(data[dataIndex]),
     ][index]
@@ -66,7 +72,6 @@ const List: FC<ListProps> = ({
                 <span
                   onClick={() => {
                     onClickSong && index === 0 && onClickSong(item['mid'])
-                    onClickSinger && index === 1 && onClickSinger(item[dataIndex])
                     onClickAlbum && index === 2 && onClickAlbum(item[dataIndex])
                   }}
                   className={classnames({

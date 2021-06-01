@@ -220,7 +220,7 @@ const Singer: FC<SingerProps> = props => {
               setCurSong(id)
             }}
             onClickSinger={id => {
-              console.log(id)
+              history.push('/Singer', { remoteplace: 'singer', mid: id })
             }}
             onClickAlbum={id => {
               console.log(id)
@@ -275,7 +275,7 @@ const Singer: FC<SingerProps> = props => {
               setCurSong(id)
             }}
             onClickSinger={id => {
-              console.log(id)
+              history.push('/Singer', { remoteplace: 'singer', mid: id })
             }}
             onClickAlbum={id => {
               console.log(id)

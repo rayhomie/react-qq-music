@@ -82,3 +82,7 @@ export function XML_CDATA(data: string) {
 
   return res
 }
+
+export const parseLrc = (str: string) => {
+  return str.split('[').map(i => i.split(']'))
+}

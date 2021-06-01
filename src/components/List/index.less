@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: row;
     font-size: 16px;
+    transition: color 300ms;
     .item {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -42,11 +43,27 @@
             color: #bbb;
           }
         }
-        & > span {
+        &.title0 > span {
           &.select {
             color: @green;
           }
           user-select: none;
+          &:hover {
+            cursor: pointer;
+            color: @green;
+          }
+        }
+        &.title2 > span {
+          &.select {
+            color: @green;
+          }
+          user-select: none;
+          &:hover {
+            cursor: pointer;
+            color: @green;
+          }
+        }
+        &.title1 > span > span > span {
           &:hover {
             cursor: pointer;
             color: @green;
