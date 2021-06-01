@@ -6,6 +6,7 @@ import Tab from '@/components/Tab'
 import List from '@/components/List'
 import Button from '@/components/Button'
 import usePlayer from '@/model/player/usePlayer'
+import useScroll from '@/model/scroll/useScroll'
 import Card from '@/components/Card'
 import SingerCard from '@/components/SingerCard'
 import { XML_CDATA, numberFormat } from '@/utils/common'
@@ -14,7 +15,8 @@ import styles from './index.less'
 interface SingerProps {}
 
 const Singer: FC<SingerProps> = props => {
-  const param = useHistory().location.state as any
+  const history = useHistory()
+  const param = history.location.state as any
   const [tab, setTab] = useState<any>(null)
   const [current, setCurrent] = useState<number>(1)
   const [singerInfo, setSingerInfo] = useState<any>(null)
@@ -22,8 +24,28 @@ const Singer: FC<SingerProps> = props => {
   const [album, setAlbum] = useState<any>(null)
   const [desc, setDesc] = useState<any>(null)
   const { setPlaylist, curSong, setCurSong } = usePlayer()
+  const { bottom, setBottom, setSingerTab } = useScroll()
+
+  //滚动底部分页
+  useEffect(() => {
+    if (bottom) {
+      tab === 'song' &&
+        setCurrent(pre => {
+          fetchSingerHotsong(param, pre + 1)
+          setBottom(false)
+          return pre + 1
+        })
+      tab === 'album' &&
+        setCurrent(pre => {
+          fetchSingerAlbum(param, 1, 10 * (pre + 1))
+          setBottom(false)
+          return pre + 1
+        })
+    }
+  }, [bottom, tab])
 
   useEffect(() => {
+    ;(document?.getElementById('page') as any).scrollTop = 0
     if (param.remoteplace === 'album') {
       //进入是专辑需要请求歌手信息
       fetchSingerHotsong(param, current)
@@ -36,18 +58,19 @@ const Singer: FC<SingerProps> = props => {
     if (!tab) return
     switch (tab) {
       case 'singer':
-        fetchSingerHotsong(param, current)
+        fetchSingerHotsong(param, 1)
         fetchSimilarSinger(param)
-        fetchSingerAlbum(param, current)
+        fetchSingerAlbum(param, 1)
         break
       case 'song':
-        fetchSingerHotsong(param, current)
+        fetchSingerHotsong(param, 1)
         break
       case 'album':
-        fetchSingerAlbum(param, current)
+        fetchSingerAlbum(param, 1)
         break
     }
     setCurrent(1)
+    setSingerTab(tab)
   }, [tab, param])
 
   //获取歌手歌曲
@@ -60,7 +83,9 @@ const Singer: FC<SingerProps> = props => {
         },
       },
     } = await getSingerHotsong({ singermid: mid, page: current, limit })
-    setSingerInfo(data)
+    current === 1
+      ? setSingerInfo(data)
+      : setSingerInfo((pre: any) => ({ ...pre, songlist: [...pre.songlist, ...data.songlist] }))
     console.log(data)
   }
 
@@ -183,7 +208,7 @@ const Singer: FC<SingerProps> = props => {
                 播放全部
               </Button>
             </div>
-            <Button icon="icon-arrow" type="more" onClick={() => playAll()}>
+            <Button icon="icon-arrow" type="more" onClick={() => setTab('song')}>
               更多
             </Button>
           </div>
@@ -204,7 +229,7 @@ const Singer: FC<SingerProps> = props => {
           />
           <div className={styles.title}>
             <span>热门专辑</span>
-            <Button icon="icon-arrow" type="more" onClick={() => playAll()}>
+            <Button icon="icon-arrow" type="more" onClick={() => setTab('album')}>
               更多
             </Button>
           </div>
@@ -224,7 +249,7 @@ const Singer: FC<SingerProps> = props => {
               <SingerCard
                 data={similarSinger}
                 onClick={id => {
-                  console.log(id)
+                  history.push('/Singer', { remoteplace: 'singer', mid: id })
                 }}
               />
             </>

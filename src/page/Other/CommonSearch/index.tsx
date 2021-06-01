@@ -14,7 +14,8 @@ import styles from './index.less'
 interface CommonSearchProps {}
 
 const CommonSearch: FC<CommonSearchProps> = props => {
-  const param = useHistory().location.state as getSearchByKeyPayload
+  const history = useHistory()
+  const param = history.location.state as getSearchByKeyPayload
   const [zhidaSinger, setZhidaSinger] = useState<any>(null)
   const [songListInfo, setSongListInfo] = useState<any>(null)
   const [tab, setTab] = useState<any>(null)
@@ -113,7 +114,7 @@ const CommonSearch: FC<CommonSearchProps> = props => {
               setCurSong(id)
             }}
             onClickSinger={id => {
-              console.log(id)
+              history.push('/Singer', { remoteplace: 'singer', mid: id[0].mid })
             }}
             onClickAlbum={id => {
               console.log(id)

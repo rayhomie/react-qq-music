@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './index.less'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { AsyncComponent } from './AsyncComponent'
+import useScroll from '@/model/scroll/useScroll'
 import Header from '@/layout/Header'
 import Menu from '@/layout/Menu'
 import Player from '@/layout/Player'
@@ -33,12 +34,25 @@ const Album = AsyncComponent(() => import(/* webpackChunkName: "Album" */ '@/pag
 const Singer = AsyncComponent(() => import(/* webpackChunkName: "Singer" */ '@/page/Other/Singer'))
 
 const MyRouter = () => {
+  const { setBottom, singerTab } = useScroll()
   return (
     <BrowserRouter>
       <Menu />
       <div className={styles.rightContainer}>
         <Header />
-        <div className={styles.page}>
+        <div
+          id="page"
+          className={styles.page}
+          onScroll={(e: any) => {
+            const { scrollHeight, clientHeight, scrollTop } = e.target
+            //歌手详情页:单曲、专辑滑动分页
+            const isSinger = window.location.pathname === '/Singer'
+            isSinger &&
+              ['song', 'album'].includes(singerTab) &&
+              !(scrollHeight - clientHeight - scrollTop) &&
+              setBottom(true)
+          }}
+        >
           <Route exact path="/" component={Recommend}></Route>
           <Route exact path="/MusicLab" component={MusicLab}></Route>
           {/* <Route exact path="/Video" component={Video}></Route>

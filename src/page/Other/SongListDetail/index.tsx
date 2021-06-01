@@ -11,7 +11,8 @@ import styles from './index.less'
 interface SongListDetailProps {}
 
 const SongListDetail: FC<SongListDetailProps> = props => {
-  const param = useHistory().location.state as getSongListDetailPayload
+  const history = useHistory()
+  const param = history.location.state as getSongListDetailPayload
   const [songListInfo, setSongListInfo] = useState<any>(null)
   const { setPlaylist, curSong, setCurSong } = usePlayer()
 
@@ -96,6 +97,7 @@ const SongListDetail: FC<SongListDetailProps> = props => {
         }}
         onClickSinger={id => {
           console.log(id)
+          history.push('/Singer', { remoteplace: 'singer', mid: id[0].mid })
         }}
         onClickAlbum={id => {
           console.log(id)
