@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getSearchByKeyPayload } from '@/api/other/index.d'
+import { getAlbumInfo } from '@/api/album'
 import { getSearchByKey as fetchSearchByKey } from '@/api/other'
 import usePlayer from '@/model/player/usePlayer'
 import Tab from '@/components/Tab'
@@ -58,6 +59,21 @@ const CommonSearch: FC<CommonSearchProps> = props => {
     setCurrent(cur)
   }
 
+  const fetchAlbumInfo = async (param: any) => {
+    const { mid } = param
+    const {
+      data: {
+        response: { data },
+      },
+    } = await getAlbumInfo({ albummid: mid })
+    const newData = {
+      ...data,
+      list: data.list.map((i: any) => ({ ...i, id: i.songid, name: i.songname, mid: i.songmid })),
+    }
+    setPlaylist(newData?.list)
+    setCurSong(newData?.list[0]['mid'])
+  }
+
   const columns = [
     {
       title: '歌曲',
@@ -90,17 +106,23 @@ const CommonSearch: FC<CommonSearchProps> = props => {
         <div className={styles.singerlan}>
           <img src={zhidaSinger.singerPic} />
           <div
-            onClick={() => history.push('/Singer', { remoteplace: 'singer', mid: zhidaSinger.singerMID })}
+            onClick={() =>
+              history.push('/Singer', { remoteplace: 'singer', mid: zhidaSinger.singerMID })
+            }
           >
             歌手：{zhidaSinger.singerName}
           </div>
           <div
-            onClick={() => history.push('/Singer', { remoteplace: 'song', mid: zhidaSinger.singerMID })}
+            onClick={() =>
+              history.push('/Singer', { remoteplace: 'song', mid: zhidaSinger.singerMID })
+            }
           >
             单曲 {zhidaSinger.songNum}
           </div>
           <div
-            onClick={() => history.push('/Singer', { remoteplace: 'album', mid: zhidaSinger.singerMID })}
+            onClick={() =>
+              history.push('/Singer', { remoteplace: 'album', mid: zhidaSinger.singerMID })
+            }
           >
             专辑 {zhidaSinger.albumNum}
           </div>
@@ -129,7 +151,7 @@ const CommonSearch: FC<CommonSearchProps> = props => {
               history.push('/Singer', { remoteplace: 'singer', mid: id })
             }}
             onClickAlbum={id => {
-              console.log(id)
+              history.push('/Album', { remoteplace: 'album', mid: id })
             }}
             currentSongId={curSong}
           />
@@ -142,6 +164,12 @@ const CommonSearch: FC<CommonSearchProps> = props => {
             title: item.album.name,
             content_id: item.album.mid,
           }))}
+          onPlay={mid => {
+            fetchAlbumInfo({ mid })
+          }}
+          onView={mid => {
+            history.push('/Album', { remoteplace: 'album', mid })
+          }}
         />
       )}
       {/* {tab === 'playlist' && (

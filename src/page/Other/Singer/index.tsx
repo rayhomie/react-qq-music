@@ -1,9 +1,11 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getSingerHotsong, getSimilarSinger, getSingerDesc } from '@/api/singer'
+import { getAlbumInfo } from '@/api/album'
 import { getSingerAlbum } from '@/api/music'
 import Tab from '@/components/Tab'
 import List from '@/components/List'
+import Icon from '@/components/Icon'
 import Button from '@/components/Button'
 import usePlayer from '@/model/player/usePlayer'
 import useScroll from '@/model/scroll/useScroll'
@@ -23,6 +25,7 @@ const Singer: FC<SingerProps> = props => {
   const [similarSinger, setSimilarSinger] = useState<any>(null)
   const [album, setAlbum] = useState<any>(null)
   const [desc, setDesc] = useState<any>(null)
+  const [errImg, setErrImg] = useState<boolean>(false)
   const { setPlaylist, curSong, setCurSong } = usePlayer()
   const { bottom, setBottom, setSingerTab } = useScroll()
 
@@ -86,7 +89,7 @@ const Singer: FC<SingerProps> = props => {
     current === 1
       ? setSingerInfo(data)
       : setSingerInfo((pre: any) => ({ ...pre, songlist: [...pre.songlist, ...data.songlist] }))
-    console.log(data)
+    // console.log(data)
   }
 
   //获取相似歌手
@@ -100,7 +103,7 @@ const Singer: FC<SingerProps> = props => {
       },
     } = await getSimilarSinger({ singermid: mid })
     setSimilarSinger(items)
-    console.log(items)
+    // console.log(items)
   }
 
   //获取专辑
@@ -136,6 +139,21 @@ const Singer: FC<SingerProps> = props => {
     setCurSong(singerInfo?.songlist[0]['mid'])
   }
 
+  const fetchAlbumInfo = async (param: any) => {
+    const { mid } = param
+    const {
+      data: {
+        response: { data },
+      },
+    } = await getAlbumInfo({ albummid: mid })
+    const newData = {
+      ...data,
+      list: data.list.map((i: any) => ({ ...i, id: i.songid, name: i.songname, mid: i.songmid })),
+    }
+    setPlaylist(newData?.list)
+    setCurSong(newData?.list[0]['mid'])
+  }
+
   const SINGER_TITLE = [
     { key: 'singer', label: `精选` },
     { key: 'song', label: `歌曲${singerInfo?.total_song || 0}` },
@@ -169,13 +187,14 @@ const Singer: FC<SingerProps> = props => {
   return (
     <div className={styles.container}>
       <div className={styles.singerInfo}>
-        {singerInfo ? (
+        {singerInfo && !errImg ? (
           <img
             className={styles.img}
             src={`http://y.gtimg.cn/music/photo_new/T001R300x300M000${singerInfo?.singer_info.mid}.jpg`}
+            onError={() => setErrImg(true)}
           />
         ) : (
-          <div className={styles.img} />
+          <Icon className={styles.img} type="icon-headpic" />
         )}
         <div className={styles.right}>
           <div className={styles.name}>{singerInfo?.singer_info.name || ''}</div>
@@ -223,7 +242,7 @@ const Singer: FC<SingerProps> = props => {
               history.push('/Singer', { remoteplace: 'singer', mid: id })
             }}
             onClickAlbum={id => {
-              console.log(id)
+              history.push('/Album', { remoteplace: 'album', mid: id })
             }}
             currentSongId={curSong}
           />
@@ -239,6 +258,12 @@ const Singer: FC<SingerProps> = props => {
               title: item.albumName,
               content_id: item.albumMid,
             }))}
+            onPlay={mid => {
+              fetchAlbumInfo({ mid })
+            }}
+            onView={mid => {
+              history.push('/Album', { remoteplace: 'album', mid })
+            }}
           />
 
           {similarSinger && (
@@ -278,7 +303,7 @@ const Singer: FC<SingerProps> = props => {
               history.push('/Singer', { remoteplace: 'singer', mid: id })
             }}
             onClickAlbum={id => {
-              console.log(id)
+              history.push('/Album', { remoteplace: 'album', mid: id })
             }}
             currentSongId={curSong}
           />
@@ -293,6 +318,12 @@ const Singer: FC<SingerProps> = props => {
               title: item.albumName,
               content_id: item.albumMid,
             }))}
+            onPlay={mid => {
+              fetchAlbumInfo({ mid })
+            }}
+            onView={mid => {
+              history.push('/Album', { remoteplace: 'album', mid })
+            }}
           />
         </div>
       )}

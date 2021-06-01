@@ -38,7 +38,7 @@ const List: FC<ListProps> = ({
             {data[dataIndex].length !== 1 && _ !== data[dataIndex].length - 1 ? ' / ' : ''}
           </span>
         )),
-      data[dataIndex]?.name,
+      (dataIndex === 'album' && data[dataIndex]?.name) || data.albumname,
       s_to_hs(data[dataIndex]),
     ][index]
   }, [])
@@ -72,7 +72,9 @@ const List: FC<ListProps> = ({
                 <span
                   onClick={() => {
                     onClickSong && index === 0 && onClickSong(item['mid'])
-                    onClickAlbum && index === 2 && onClickAlbum(item[dataIndex])
+                    onClickAlbum &&
+                      index === 2 &&
+                      onClickAlbum(item?.[dataIndex]?.['mid'] || item.albummid)
                   }}
                   className={classnames({
                     [styles.select]: currentSongId === item.mid,

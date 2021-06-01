@@ -11,10 +11,12 @@ const SingerCard: FC<SingerCardProps> = ({ data, onClick }) => {
     () =>
       data.map(({ name, id, mid }) => (
         <div className={styles.item} key={id}>
-          <img
-            src={`http://imgcache.qq.com/music/photo/mid_singer_300/q/K/${mid}.jpg`}
-            onClick={() => onClick && onClick(mid)}
-          />
+          <div>
+            <img
+              src={`http://imgcache.qq.com/music/photo/mid_singer_300/q/K/${mid}.jpg`}
+              onClick={() => onClick && onClick(mid)}
+            />
+          </div>
           <div onClick={() => onClick && onClick(mid)}>{name}</div>
         </div>
       )),

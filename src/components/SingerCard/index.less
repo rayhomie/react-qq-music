@@ -10,16 +10,24 @@
     align-items: center;
     justify-content: center;
     margin: 20px;
-    & > img {
+    div:first-child {
+      width: @singercard-item-width;
+      height: @singercard-item-width;
+      border-radius: @singercard-item-width;
+      overflow: hidden;
+    }
+    & > div > img {
       -webkit-user-drag: none;
       width: @singercard-item-width;
       height: @singercard-item-width;
       border-radius: @singercard-item-width;
+      transition: transform 300ms;
       &:hover {
+        transform: scale(1.1);
         cursor: pointer;
       }
     }
-    & > div {
+    div:last-child {
       margin-top: 20px;
       font-size: 18px;
       &:hover {

@@ -63,10 +63,15 @@
             color: @green;
           }
         }
-        &.title1 > span > span > span {
-          &:hover {
-            cursor: pointer;
+        &.title1 > span {
+          &.select {
             color: @green;
+          }
+          & > span > span {
+            &:hover {
+              cursor: pointer;
+              color: @green;
+            }
           }
         }
       }

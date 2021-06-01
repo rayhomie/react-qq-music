@@ -49,7 +49,9 @@ const PlayListModal: FC<PlayListModalProps> = ({
               <Icon type="icon-CD" style={{ fontSize: 50 }} />
             ) : (
               <img
-                src={`https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg`}
+                src={`https://y.gtimg.cn/music/photo_new/T002R300x300M000${
+                  item?.album?.mid || item.albummid
+                }.jpg`}
                 onError={() => {
                   setErrorImg((pre: any) => ({ ...pre, [`${item.id}`]: true }))
                 }}
@@ -57,7 +59,14 @@ const PlayListModal: FC<PlayListModalProps> = ({
             )}
             <div className={styles.info}>
               <div style={{ fontSize: 14 }}>{item.name}</div>
-              <div style={{ fontSize: 15 }}>{item.singer[0].name}</div>
+              <div style={{ fontSize: 15 }}>
+                {item.singer.map(({ name, mid }: any, _: number) => (
+                  <span key={_}>
+                    <span>{name}</span>
+                    {item.singer.length !== 1 && _ !== item.singer.length - 1 ? ' / ' : ''}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           <div className={styles.time}>

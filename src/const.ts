@@ -39,6 +39,15 @@ const CONST = {
     // { key: 'playlist', label: '歌单' },
     // { key: 'mv', label: 'MV' },
   ],
+  //专辑详情
+  ALBUM: {
+    name: '专辑',
+    singername: '歌手',
+    genre: '流派',
+    lan: '语言',
+    company: '唱片公司',
+    desc: '专辑简介',
+  },
 }
 
 export default CONST
