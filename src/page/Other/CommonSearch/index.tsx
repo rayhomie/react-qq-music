@@ -38,7 +38,6 @@ const CommonSearch: FC<CommonSearchProps> = props => {
     } = await fetchSearchByKey(param)
     setZhidaSinger(data.zhida.zhida_singer)
     setSongListInfo(data.song)
-    console.log(data.song)
   }
 
   const playAll = () => {
