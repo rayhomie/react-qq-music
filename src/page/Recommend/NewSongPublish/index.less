@@ -12,9 +12,11 @@
       width: calc((@page-width - 60px - 400px) / 3);
       align-items: center;
       padding: 10px;
+      border-radius: 10px;
+      background-color: #eee;
       transition: background-color 0.3s;
       &:hover {
-        background-color: #eee;
+        background-color: #bbbbbb64;
       }
       .left {
         -webkit-user-drag: none;
@@ -48,7 +50,7 @@
           justify-content: center;
           line-height: 24px;
           & > span {
-            width: 200px;
+            width: calc((@page-width - 60px - 400px) / 3 - 120px - 50px);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -61,7 +63,7 @@
             color: #8e8e8e;
           }
           .singerCon {
-            width: 200px;
+            width: calc((@page-width - 60px - 400px) / 3 - 120px - 50px);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

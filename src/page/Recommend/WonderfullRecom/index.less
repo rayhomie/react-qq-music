@@ -1,0 +1,41 @@
+@import '@/style/variables.less';
+
+.container {
+  width: calc(@page-width - 300px);
+  height: calc(@page-height - 20px - 43px - 50px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  .img {
+    transition: transform 300ms;
+    width: calc(@page-width - 300px - 20px);
+    height: calc((@page-width - 300px - 20px) * 0.4);
+    margin: 50px 20px 0 0;
+  }
+  .dotContainer {
+    position: absolute;
+    top: calc((@page-width - 300px - 20px) * 0.4 + 50px);
+    width: calc(@page-width - 300px - 20px);
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    .dot {
+      margin: 15px;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background-color: #e0e0e0;
+      transition: background-color 300ms;
+      &.active {
+        background-color: #aeaeae;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: #aeaeae;
+      }
+    }
+  }
+}
