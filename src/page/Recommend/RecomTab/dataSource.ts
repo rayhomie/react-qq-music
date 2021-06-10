@@ -22,8 +22,8 @@ export const dataSource: DataType[] = [
     label: CONST['RANK'],
     key: '4',
   },
-  {
-    label: CONST['MV'],
-    key: '5',
-  },
+  // {
+  //   label: CONST['MV'],
+  //   key: '5',
+  // },
 ]

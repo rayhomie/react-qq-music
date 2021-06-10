@@ -18,7 +18,7 @@ const TabMap: any = {
   '2': <WonderfullRecom />,
   '3': <NewDishPublish />,
   '4': <Rank />,
-  '5': <MV />,
+  // '5': <MV />,
 }
 
 const Recommend: FC<RecommendProps> = props => {

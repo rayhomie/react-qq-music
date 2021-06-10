@@ -104,7 +104,12 @@ const CommonSearch: FC<CommonSearchProps> = props => {
       </div>
       {zhidaSinger && (
         <div className={styles.singerlan}>
-          <img src={zhidaSinger.singerPic} />
+          <img
+            src={zhidaSinger.singerPic}
+            onClick={() =>
+              history.push('/Singer', { remoteplace: 'singer', mid: zhidaSinger.singerMID })
+            }
+          />
           <div
             onClick={() =>
               history.push('/Singer', { remoteplace: 'singer', mid: zhidaSinger.singerMID })

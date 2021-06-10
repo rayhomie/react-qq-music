@@ -63,7 +63,7 @@ module.exports = {
     new webpack.DllReferencePlugin({
       manifest: path.resolve(__dirname, 'dll', 'react.manifest.json'),
     }),
-    new BundleAnalyzerPlugin(),
+    ...(ENV === 'production' ? [new BundleAnalyzerPlugin()] : []),
   ],
   optimization: {
     minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
