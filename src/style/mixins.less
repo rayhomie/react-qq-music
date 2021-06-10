@@ -53,6 +53,31 @@
   }
 }
 
+.toplay(  
+  @direction: toplay,
+  @startscale: scale(0),
+  @endscale: scale(1)
+) {
+  .@{direction}-enter {
+    opacity: 0;
+    transform: @startscale;
+  }
+  .@{direction}-enter-active {
+    opacity: 1;
+    transform: @endscale;
+    transition: opacity 300ms, transform 300ms;
+  }
+  .@{direction}-exit {
+    opacity: 1;
+    transform: @endscale;
+  }
+  .@{direction}-exit-active {
+    opacity: 0;
+    transform: @startscale;
+    transition: opacity 300ms, transform 300ms;
+  }
+}
+
 .playlistmodal(  
   @direction: playlistmodal,
   @delay: 500ms,

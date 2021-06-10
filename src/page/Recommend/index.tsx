@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import RecomTab from './RecomTab'
 import { getRecommend } from '@/api/recommend'
 import useRecom from '@/model/recommend/useRecom'
@@ -22,8 +22,7 @@ const TabMap: any = {
 }
 
 const Recommend: FC<RecommendProps> = props => {
-  const { setAllRecommend } = useRecom()
-  const [active, setActive] = useState<string>('0')
+  const { setAllRecommend, active, setActive } = useRecom()
 
   useEffect(() => {
     fetchApi()
@@ -33,7 +32,6 @@ const Recommend: FC<RecommendProps> = props => {
     const {
       data: { response },
     } = await getRecommend()
-
     setAllRecommend(response)
   }
 
@@ -43,7 +41,10 @@ const Recommend: FC<RecommendProps> = props => {
 
   return (
     <div className={styles.container}>
-      <RecomTab onChange={(key, label) => tabChange(key, label)} />
+      <RecomTab
+        onChange={(key, label) => tabChange(key, label)}
+        defaultActiveKey={active}
+      />
       {TabMap[active]}
     </div>
   )

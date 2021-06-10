@@ -26,7 +26,6 @@ const SongListDetail: FC<SongListDetailProps> = props => {
         response: { cdlist },
       },
     } = await getSongListDetail(param)
-    // console.log(cdlist[0])
     setSongListInfo(cdlist[0])
   }
 

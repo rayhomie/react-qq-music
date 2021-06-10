@@ -89,7 +89,6 @@ const Singer: FC<SingerProps> = props => {
     current === 1
       ? setSingerInfo(data)
       : setSingerInfo((pre: any) => ({ ...pre, songlist: [...pre.songlist, ...data.songlist] }))
-    // console.log(data)
   }
 
   //获取相似歌手
@@ -103,7 +102,6 @@ const Singer: FC<SingerProps> = props => {
       },
     } = await getSimilarSinger({ singermid: mid })
     setSimilarSinger(items)
-    // console.log(items)
   }
 
   //获取专辑
@@ -117,7 +115,6 @@ const Singer: FC<SingerProps> = props => {
       },
     } = await getSingerAlbum({ singermid: mid, page: current, limit })
     setAlbum(data)
-    console.log(data)
   }
 
   //获取歌手详情

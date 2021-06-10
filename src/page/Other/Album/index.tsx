@@ -38,7 +38,6 @@ const Album: FC<AlbumProps> = props => {
   }
 
   const playAll = () => {
-    console.log(albumInfo)
     setPlaylist(albumInfo?.list)
     setCurSong(albumInfo?.list[0]['mid'])
   }
