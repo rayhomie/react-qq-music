@@ -37,6 +37,17 @@ const WonderfullRecom: FC<WonderfullRecomProps> = ({ intervalIime = 3000 }) => {
     history.push('/Album', { remoteplace: 'album', mid: url })
   }
 
+  const position: any = (cur: number, index: number, width: number) => {
+    if (cur === index) {
+      return [`translateX(${0}px)`, 100]
+    }
+    if (cur - 1 === index || (cur - 1 < 0 && index === info.length - 1)) {
+      return [`translateX(-${width}px)`, 99]
+    } else {
+      return [`translateX(${width}px)`, 98]
+    }
+  }
+
   return (
     <div className={styles.container}>
       {info?.map((item: any, index: number) => (
@@ -46,9 +57,16 @@ const WonderfullRecom: FC<WonderfullRecomProps> = ({ intervalIime = 3000 }) => {
           src={item?.pic_info.url}
           ref={index ? undefined : img}
           style={{
-            transform: `translateX(-${
-              cur * (img.current?.clientWidth ? img.current?.clientWidth + 20 : 0)
-            }px)`,
+            transform: position(
+              cur,
+              index,
+              img.current?.clientWidth ? img.current?.clientWidth + 20 : 0
+            )[0],
+            zIndex: position(
+              cur,
+              index,
+              img.current?.clientWidth ? img.current?.clientWidth + 20 : 0
+            )[1],
           }}
           onClick={() => goUrl(item.jump_info.url)}
         />
