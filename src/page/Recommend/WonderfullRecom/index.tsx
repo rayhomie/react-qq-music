@@ -4,28 +4,38 @@ import classnames from 'classnames'
 import { useHistory } from 'react-router-dom'
 import styles from './index.less'
 
-interface WonderfullRecomProps {}
+interface WonderfullRecomProps {
+  intervalIime?: number
+}
 
-const WonderfullRecom: FC<WonderfullRecomProps> = props => {
+const WonderfullRecom: FC<WonderfullRecomProps> = ({ intervalIime = 3000 }) => {
   const history = useHistory()
   const { allRecommend } = useRecom()
   const [info, setInfo] = useState<any>([])
-  const [curBanner, setCurBanner] = useState<number>(0)
+  //当前索引
+  const [cur, setCur] = useState<number>(0)
   const img = useRef<any>(null)
 
   useEffect(() => {
     setInfo(allRecommend?.focus.data.content)
-    console.log(allRecommend?.focus.data.content)
   }, [allRecommend])
 
-  // useEffect(() => {
-  //   intervalBanner(2)
-  // }, [img.current])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCur(pre => {
+        if (pre === info.length - 1) {
+          return 0
+        } else {
+          return pre + 1
+        }
+      })
+    }, intervalIime)
+    return () => clearInterval(interval)
+  }, [info])
 
-  // const intervalBanner = (index: number) => {
-  //   let width = (img.current as any)?.clientWidth + 20
-  //   let i = index
-  // }
+  const goUrl = (url: string) => {
+    history.push('/Album', { remoteplace: 'album', mid: url })
+  }
 
   return (
     <div className={styles.container}>
@@ -36,8 +46,11 @@ const WonderfullRecom: FC<WonderfullRecomProps> = props => {
           src={item?.pic_info.url}
           ref={index ? undefined : img}
           style={{
-            transform: curBanner ? `translateX(-${curBanner}px)` : `translateX(${curBanner}px)`,
+            transform: `translateX(-${
+              cur * (img.current?.clientWidth ? img.current?.clientWidth + 20 : 0)
+            }px)`,
           }}
+          onClick={() => goUrl(item.jump_info.url)}
         />
       ))}
       <div className={styles.dotContainer}>
@@ -45,13 +58,10 @@ const WonderfullRecom: FC<WonderfullRecomProps> = props => {
           <div
             key={item?.id}
             className={classnames(styles.dot, {
-              [styles.active]: index
-                ? curBanner / index === (img.current as any)?.clientWidth + 20
-                : curBanner === 0,
+              [styles.active]: cur === index,
             })}
             onClick={() => {
-              let width = (img.current as any)?.clientWidth + 20
-              setCurBanner(width * index)
+              setCur(index)
             }}
           ></div>
         ))}
