@@ -10,9 +10,10 @@ interface CardProps {
   showListenNum?: boolean
   onPlay?: (id: number) => void
   onView?: (id: number) => void
+  clickSinger?: (id: number) => void
 }
 
-const Card: FC<CardProps> = ({ data, showListenNum = false, onPlay, onView }) => {
+const Card: FC<CardProps> = ({ data, showListenNum = false, onPlay, onView, clickSinger }) => {
   const [list, setList] = useState<any[]>([])
   const [toplay, setToplay] = useState<{ show: boolean; title: string }>({
     show: false,
@@ -25,7 +26,7 @@ const Card: FC<CardProps> = ({ data, showListenNum = false, onPlay, onView }) =>
 
   const RenderCard = useMemo(
     () =>
-      list?.map(({ cover, title, listen_num, content_id }, index) => (
+      list?.map(({ cover, title, listen_num, content_id, singers, release_time }, index) => (
         <div key={index} style={title === 'no123' ? { visibility: 'hidden' } : {}}>
           <div
             className={styles.item}
@@ -56,7 +57,23 @@ const Card: FC<CardProps> = ({ data, showListenNum = false, onPlay, onView }) =>
             )}
             <img src={cover} alt={title} />
           </div>
-          <div onClick={() => onView && onView(content_id)}>{title}</div>
+          <div className={styles.title} onClick={() => onView && onView(content_id)}>
+            {title}
+          </div>
+          {singers?.map(({ name, mid }: any, _: number) => (
+            <span key={_} className={styles.singers}>
+              <span
+                className={styles.singer}
+                onClick={() => {
+                  clickSinger && clickSinger(mid)
+                }}
+              >
+                {name}
+              </span>
+              {singers.length !== 1 && _ !== singers.length - 1 ? ' / ' : ''}
+            </span>
+          ))}
+          <span className={styles.time}>{release_time}</span>
         </div>
       )),
     [list, toplay]

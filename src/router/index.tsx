@@ -47,8 +47,8 @@ const MyRouter = () => {
             const { scrollHeight, clientHeight, scrollTop } = e.target
             //歌手详情页:单曲、专辑滑动分页
             const isSinger = window.location.pathname === '/Singer'
-            isSinger &&
-              ['song', 'album'].includes(singerTab) &&
+            const isNewDisk = window.location.pathname === '/'
+            ;((isSinger && ['song', 'album'].includes(singerTab)) || isNewDisk) &&
               !(scrollHeight - clientHeight - scrollTop) &&
               setBottom(true)
           }}

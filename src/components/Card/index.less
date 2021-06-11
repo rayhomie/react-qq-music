@@ -55,7 +55,24 @@
           transform: translateY(-10px);
         }
       }
-      div:last-child {
+      .singers {
+        color: #b7b7b7;
+        line-height: 24px;
+        transition: color 0.5s;
+        .singer {
+          &:hover {
+            cursor: pointer;
+            color: @green;
+          }
+        }
+      }
+
+      .time {
+        color: #b7b7b7;
+        display: block;
+        line-height: 24px;
+      }
+      .title {
         width: @cardlist-img-width;
         margin-top: 10px;
         overflow: hidden;
