@@ -91,6 +91,9 @@ const Player: FC<PlayerProps> = props => {
     } = await fetchMusicPlay({ songmid: curSong })
     for (let item in playUrl) {
       setMusicUrl(playUrl[item].url)
+      if (playUrl[item].error) {
+        alert(playUrl[item].error)
+      }
     }
   }
 
@@ -198,6 +201,9 @@ const Player: FC<PlayerProps> = props => {
             onTimeUpdate={() =>
               setProgress(audio.current.currentTime / audio.current.duration || 0)
             }
+            onLoad={e => {
+              console.log(e)
+            }}
             onEnded={() => musicEnd()}
           >
             您的浏览器不支持 audio 元素。
