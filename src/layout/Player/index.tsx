@@ -7,11 +7,13 @@ import Icon from '@/components/Icon'
 import Volume from '@/components/Volume'
 import classnames from 'classnames'
 import usePlayer from '@/model/player/usePlayer'
+import { useHistory } from 'react-router-dom'
 import styles from './index.less'
 
 interface PlayerProps {}
 
 const Player: FC<PlayerProps> = props => {
+  const history = useHistory()
   const [pic, setPic] = useState<string>('')
   const [info, setInfo] = useState<any>(null)
   const {
@@ -93,6 +95,7 @@ const Player: FC<PlayerProps> = props => {
       setMusicUrl(playUrl[item].url)
       if (playUrl[item].error) {
         alert(playUrl[item].error)
+        nextMusic()
       }
     }
   }
@@ -190,8 +193,26 @@ const Player: FC<PlayerProps> = props => {
           )}
         </div>
         <div className={styles.info}>
-          <span>{info?.track_info.name}</span>
-          {info && <span> - {info?.track_info?.singer[0].name}</span>}
+          <div>{info?.track_info.name}</div>
+          {info && (
+            <div>
+              {info?.track_info?.singer?.map(({ name, mid }: any, _: number) => (
+                <span key={_} className={styles.singers}>
+                  <span
+                    className={styles.singer}
+                    onClick={() => history.push('/Singer', { remoteplace: 'singer', mid })}
+                  >
+                    {name}
+                  </span>
+                  {info?.track_info?.singer.length !== 1 &&
+                  _ !== info?.track_info?.singer.length - 1
+                    ? ' / '
+                    : ''}
+                </span>
+              ))}
+              {/* {info?.track_info?.singer[0].name} */}
+            </div>
+          )}
         </div>
         <div className={styles.control}>
           <audio

@@ -7,7 +7,6 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-
   .pic {
     & > img {
       user-select: none;
@@ -20,7 +19,21 @@
   }
   .info {
     width: @player-info-width;
-    span:last-child {
+    line-height: 24px;
+    & > div {
+      width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .singer {
+      transition: color 300ms;
+      &:hover {
+        cursor: pointer;
+        color: @green;
+      }
+    }
+    div:last-child {
       color: #7d7d7d;
     }
   }
@@ -31,6 +44,7 @@
     align-items: center;
     & > i {
       margin: 5px;
+      transition: color 300ms;
       &:hover {
         color: @green;
         cursor: pointer;
@@ -67,6 +81,7 @@
       .musiclist {
         color: @player-playlist-icon-color;
         font-size: 20px;
+        transition: color 300ms;
         &:hover {
           cursor: pointer;
           color: @green;
