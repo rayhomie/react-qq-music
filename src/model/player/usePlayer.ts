@@ -10,6 +10,10 @@ const usePlayer = () => {
   const [curSong, setCurSong] = useState<any>(null)
   //打开播放列表
   const [openPlaylist, setOpenPlaylist] = useState<boolean>(false)
+  //音量
+  const [volume, setVolume] = useState<number>(1)
+  //循环模块
+  const [circle, setCircle] = useState<number>(0)
 
   return {
     play,
@@ -20,6 +24,10 @@ const usePlayer = () => {
     setCurSong,
     openPlaylist,
     setOpenPlaylist,
+    volume,
+    setVolume,
+    circle,
+    setCircle,
   }
 }
 

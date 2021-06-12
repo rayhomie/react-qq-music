@@ -1,0 +1,63 @@
+@import '@/style/variables.less';
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 150px;
+  background-color: #fff;
+  position: absolute;
+  left: calc(@menu-width + 30px + 70px + 200px + @player-control-width / 2 + 30px + 27px);
+  bottom: 70px;
+  z-index: 99;
+  box-shadow: -10px 10px 10px #99999930;
+  border-radius: 15px;
+  animation: enter 300ms 1;
+  @keyframes enter {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  &.visible {
+    display: none;
+  }
+  &:after {
+    content: '';
+    display: block;
+    border-width: 0 20px 20px;
+    border-style: solid;
+    position: absolute;
+    width: 0;
+    height: 0;
+    transform: rotate(180deg) translateY(-75px);
+    border-color: transparent transparent #fff;
+  }
+  .track {
+    height: 100px;
+    width: 5px;
+    border-radius: 2px;
+    background-color: @green;
+    margin-bottom: 15px;
+    .progress {
+      background-color: #ededed;
+      .dot {
+        -webkit-user-drag: none;
+        background-color: @green;
+        width: 9px;
+        height: 9px;
+        border-radius: 20px;
+      }
+    }
+  }
+  & > span {
+    -webkit-user-drag: none;
+    font-size: 12px;
+    user-select: none;
+  }
+}

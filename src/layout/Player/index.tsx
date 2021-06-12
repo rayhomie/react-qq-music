@@ -4,6 +4,7 @@ import { getImageUrl } from '@/api/recommend'
 import { s_to_hs } from '@/utils/common'
 import Progress from '@/components/Progress'
 import Icon from '@/components/Icon'
+import Volume from '@/components/Volume'
 import classnames from 'classnames'
 import usePlayer from '@/model/player/usePlayer'
 import styles from './index.less'
@@ -13,16 +14,33 @@ interface PlayerProps {}
 const Player: FC<PlayerProps> = props => {
   const [pic, setPic] = useState<string>('')
   const [info, setInfo] = useState<any>(null)
-  const { play, setPlay, playlist, setPlaylist, curSong, setCurSong, setOpenPlaylist } = usePlayer()
+  const {
+    play,
+    setPlay,
+    playlist,
+    setPlaylist,
+    curSong,
+    setCurSong,
+    setOpenPlaylist,
+    volume,
+    setVolume,
+    circle,
+    setCircle,
+  } = usePlayer()
   const [errorImg, setErrorImg] = useState<boolean>(false)
   const [musicUrl, setMusicUrl] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
+  const [volumeShow, setVolumeShow] = useState<boolean>(false)
 
   const audio = useRef<any>(null)
 
   useEffect(() => {
     play ? audio.current.pause() : audio.current.play()
   }, [play])
+
+  useEffect(() => {
+    audio.current.volume = volume >= 1 ? 1 : volume <= 0 ? 0 : volume
+  }, [volume])
 
   useEffect(() => {
     if (curSong) {
@@ -85,11 +103,76 @@ const Player: FC<PlayerProps> = props => {
   //音乐结束
   const musicEnd = () => {
     setPlay(true)
+    switch (circle) {
+      case 0:
+        nextMusic()
+        break
+      case 1:
+        randomMusic()
+        break
+      case 2:
+        soloMusic()
+        break
+    }
+  }
+
+  const findIndex: any = (playlist: any[], curSong: string) => {
+    let index
+    playlist.forEach((item, _index) => {
+      if (curSong === item.mid) {
+        index = _index
+        return
+      }
+    })
+    return index || 0
+  }
+
+  //上一首
+  const preMusic = () => {
+    if (circle !== 1) {
+      const pre = findIndex(playlist, curSong) - 1
+      setCurSong(playlist[pre >= 0 ? pre : playlist.length - 1].mid)
+    } else {
+      randomMusic()
+    }
+  }
+
+  //下一首
+  const nextMusic = () => {
+    if (circle !== 1) {
+      const pre = findIndex(playlist, curSong) + 1
+      setCurSong(playlist[pre > playlist.length - 1 ? 0 : pre].mid)
+    } else {
+      randomMusic()
+    }
+  }
+
+  //随机播放
+  const randomMusic = () => {
+    const randomIndex = ((Math.random() * 1000) | 0) % playlist.length
+    setCurSong(playlist[randomIndex].mid)
+  }
+
+  //单曲循环
+  const soloMusic = () => {
+    audio.current.currentTime = 0
+    audio.current.play()
+    setPlay(false)
+  }
+
+  const circleChange = () => {
+    setCircle(pre => (pre === 0 ? 1 : pre === 1 ? 2 : 0))
   }
 
   return (
     <>
       <Progress progress={progress} onControl={modifyProgress} />
+      <Volume
+        visible={volumeShow}
+        volumeChange={volume => setVolume(volume)}
+        //解决异步bug
+        onClickOutside={() => (volumeShow ? setVolumeShow(false) : () => {})}
+      />
       <div className={styles.container}>
         <div className={styles.pic}>
           {errorImg && pic ? (
@@ -119,8 +202,14 @@ const Player: FC<PlayerProps> = props => {
           >
             您的浏览器不支持 audio 元素。
           </audio>
-          <i className={classnames('iconfont', 'icon-hanhan-01-01', styles.circle)} />
-          <i className={classnames('iconfont', 'icon-shangyishou', styles.arrow)} />
+          <i
+            className={classnames('iconfont', `icon-hanhan-${circle}`, styles.circle)}
+            onClick={() => circleChange()}
+          />
+          <i
+            className={classnames('iconfont', 'icon-shangyishou', styles.arrow)}
+            onClick={preMusic}
+          />
           <i
             className={classnames(
               'iconfont',
@@ -129,8 +218,21 @@ const Player: FC<PlayerProps> = props => {
             )}
             onClick={() => setPlay(pre => !pre)}
           />
-          <i className={classnames('iconfont', 'icon-xiayishou', styles.arrow)} />
-          <i className={classnames('iconfont', 'icon-soound-min', styles.voice)} />
+          <i
+            className={classnames('iconfont', 'icon-xiayishou', styles.arrow)}
+            onClick={nextMusic}
+          />
+          {!volume ? (
+            <i
+              className={classnames('iconfont', 'icon-mute', styles.voice)}
+              onClick={() => setVolumeShow(true)}
+            />
+          ) : (
+            <i
+              className={classnames('iconfont', 'icon-soound-min', styles.voice)}
+              onClick={() => setVolumeShow(true)}
+            />
+          )}
         </div>
         <div className={styles.playlist}>
           <div className={styles.timeAround}>
