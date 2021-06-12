@@ -40,6 +40,13 @@ const Player: FC<PlayerProps> = props => {
     play ? audio.current.pause() : audio.current.play()
   }, [play])
 
+  //如果localstorge有自动播放
+  useEffect(() => {
+    if (localStorage.getItem('playlist') && localStorage.getItem('curSong')) {
+      setTimeout(() => setPlay(true), 300)
+    }
+  }, [])
+
   useEffect(() => {
     audio.current.volume = volume >= 1 ? 1 : volume <= 0 ? 0 : volume
   }, [volume])

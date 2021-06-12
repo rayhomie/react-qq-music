@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createModel } from 'hox'
 
 const usePlayer = () => {
@@ -14,6 +14,24 @@ const usePlayer = () => {
   const [volume, setVolume] = useState<number>(1)
   //循环模块
   const [circle, setCircle] = useState<number>(0)
+
+  useEffect(() => {
+    setPlaylist(JSON.parse(localStorage.getItem('playlist') || '[]'))
+    setCurSong(localStorage.getItem('curSong'))
+    setCircle(+(localStorage.getItem('circle') || 0))
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('playlist', JSON.stringify(playlist))
+  }, [playlist])
+
+  useEffect(() => {
+    localStorage.setItem('curSong', curSong || '')
+  }, [curSong])
+
+  useEffect(() => {
+    localStorage.setItem('circle', circle.toString())
+  }, [circle])
 
   return {
     play,
