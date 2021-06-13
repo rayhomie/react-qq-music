@@ -14,12 +14,29 @@ const usePlayer = () => {
   const [volume, setVolume] = useState<number>(1)
   //循环模块
   const [circle, setCircle] = useState<number>(0)
+  //搜索是否focus
+  const [searchFocus, setSearchFocus] = useState<boolean>(false)
 
   useEffect(() => {
     setPlaylist(JSON.parse(localStorage.getItem('playlist') || '[]'))
     setCurSong(localStorage.getItem('curSong'))
     setCircle(+(localStorage.getItem('circle') || 0))
   }, [])
+
+  useEffect(() => {
+    //监听空格播放进行播放，并且屏蔽其他的输入
+    function keypress(e: any) {
+      if (!searchFocus) {
+        switch (e.code) {
+          case 'Space':
+            setPlay(pre => !pre)
+            break
+        }
+      }
+    }
+    document.addEventListener('keydown', keypress)
+    return () => document.removeEventListener('keydown', keypress)
+  }, [searchFocus])
 
   useEffect(() => {
     localStorage.setItem('playlist', JSON.stringify(playlist))
@@ -46,6 +63,8 @@ const usePlayer = () => {
     setVolume,
     circle,
     setCircle,
+    searchFocus,
+    setSearchFocus,
   }
 }
 

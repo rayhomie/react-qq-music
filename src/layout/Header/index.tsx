@@ -4,15 +4,18 @@ import Navigation from './Navigation'
 import { SearchOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 import useApp from '@/model/app/useApp'
+import usePlayer from '@/model/player/usePlayer'
 import { router, searchTab } from '@/router'
 import { getHotkey as fetchHotkey, getSmartbox as fetchSmartbox } from '@/api/other'
 import { debounce } from '@/utils/common'
+
 import styles from './index.less'
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = props => {
   const { setSideId, setNav } = useApp()
+  const { setSearchFocus } = usePlayer()
   const history = useHistory()
   const [fetchData, setFetchData] = useState<any>(null)
 
@@ -68,7 +71,13 @@ const Header: FC<HeaderProps> = props => {
         onSearch={onSearch}
         onChange={debounce(onChange, 500)}
         searchData={fetchData}
-        onFocus={value => (value ? getSmartbox(value) : getHotkey())}
+        onFocus={value => {
+          setSearchFocus(true)
+          value ? getSmartbox(value) : getHotkey()
+        }}
+        onBlur={() => {
+          setSearchFocus(false)
+        }}
         onSelect={(res, type, id) => {
           history.push((searchTab as any)[type], { key: res, remoteplace: type, mid: id })
         }}
