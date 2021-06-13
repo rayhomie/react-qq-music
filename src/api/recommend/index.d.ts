@@ -4,7 +4,7 @@ export type getTopListsPayload = {
 }
 
 export type getRanksPayload = {
-  topId?: number //榜单id
+  topId?: number | string //榜单id
   page?: number //当前页数, 默认为1
   limit?: number //取出歌单数量, 默认为 10
 }

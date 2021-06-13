@@ -1,3 +1,4 @@
+@import '@/style/variables.less';
 .container {
   display: flex;
   width: fit-content;
@@ -5,15 +6,87 @@
     width: 224px;
     height: 500px;
     margin-right: 20px;
+    border-radius: 20px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 300ms;
+    &:hover {
+      opacity: 0.8;
+    }
     .head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
       .title {
+        font-size: 20px;
+        margin-bottom: 10px;
       }
       .child {
+        font-size: 26px;
+        font-weight: 400;
       }
     }
     .playIcon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 60px;
+      margin-top: 20px;
+      i {
+        color: #fff;
+        font-size: 50px;
+        transition: color 300ms;
+        &:hover {
+          cursor: pointer;
+          color: @green;
+        }
+      }
+      .line {
+        width: 36px;
+        height: 2px;
+        margin: 24px 7px;
+        background-color: #fff;
+      }
     }
     .songlist {
+      width: 150px;
+      .item {
+        display: flex;
+        flex-direction: row;
+        font-size: 14px;
+        margin-top: 27px;
+        .left {
+          margin-right: 15px;
+        }
+        .right {
+          .name {
+            width: 130px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-bottom: 5px;
+            transition: color 300ms;
+            &:hover {
+              cursor: pointer;
+              color: @green;
+            }
+          }
+          .singer {
+            width: 130px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: color 300ms;
+            &:hover {
+              cursor: pointer;
+              color: @green;
+            }
+          }
+        }
+      }
     }
     &.bg_0 {
       background: url('@/font/bg_rank.jpg') no-repeat;
