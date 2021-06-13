@@ -50,9 +50,9 @@
 @player-height: 75px;
 @player-bgcolor: @white;
 @player-padding:10px 30px;
-@player-info-width: 200px;
-@player-control-width: calc((@player-width - 70px - 60px - 200px) / 2);
-@player-playlist-width: calc((@player-width - 70px - 60px - 200px) / 2);
+@player-info-width: calc((@player-width - 70px - 60px) / 3);
+@player-control-width: calc((@player-width - 70px - 60px) / 3 - 100px);
+@player-playlist-width: calc((@player-width - 70px - 60px) / 3 + 100px);
 @player-playlist-icon-color: #7d7d7d;
 
 //page
@@ -136,3 +136,5 @@
 @playlistmodal-width: 350px;
 @playlistmodal-bgcolor: #fff;
 @playlistmodal-padding: 10px 20px 0 20px;
+
+@banner-width: calc(@page-width - 200px - 20px);

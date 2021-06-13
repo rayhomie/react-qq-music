@@ -1,27 +1,30 @@
 @import '@/style/variables.less';
 
 .container {
-  width: calc(@page-width - 300px);
-  height: calc(@page-height - 20px - 43px - 50px);
+  width: @banner-width;
+  height: calc(@page-height - 20px - 43px);
   overflow: hidden;
   display: flex;
   flex-direction: row;
   position: relative;
+  margin-left: 50px;
+  box-sizing: border-box;
+  padding: calc((@page-height - 20px - 39px - (@banner-width) * 0.4) / 2) 0 0 0;
+  margin: 0 60px;
   .img {
     position: absolute;
     -webkit-user-drag: none;
     transition: transform 300ms;
-    width: calc(@page-width - 300px - 20px);
-    height: calc((@page-width - 300px - 20px) * 0.4);
-    margin: 50px 20px 0 0;
+    width: @banner-width;
+    height: calc((@banner-width) * 0.4);
     &:hover {
       cursor: pointer;
     }
   }
   .dotContainer {
     position: absolute;
-    top: calc((@page-width - 300px - 20px) * 0.4 + 50px);
-    width: calc(@page-width - 300px - 20px);
+    top: calc((@page-height - 20px - 39px - (@banner-width) * 0.4) / 2 + (@banner-width) * 0.4);
+    width: calc(@banner-width);
     height: 50px;
     display: flex;
     flex-direction: row;

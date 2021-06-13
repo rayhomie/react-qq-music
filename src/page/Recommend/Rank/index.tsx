@@ -18,10 +18,7 @@ const Rank: FC<RankProps> = props => {
 
   return (
     <div className={styles.container}>
-      <h1>排行榜</h1>
-      <div style={styles.cardContainer}>
-        <RankCard data={[]} />
-      </div>
+      <RankCard data={info} />
     </div>
   )
 }

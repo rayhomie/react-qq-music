@@ -1,6 +1,9 @@
 @import '@/style/variables.less';
 .container {
-  display: block;
-  .cardContainer {
-  }
+  padding: calc((@page-height - 20px - 39px - 500px) / 2) 0;
+  margin: 0 60px;
+  width: calc(@page-width - 200px);
+  position: relative;
+  z-index: 1;
+  overflow-x: scroll;
 }
