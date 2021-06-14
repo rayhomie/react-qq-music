@@ -6,4 +6,17 @@
   position: relative;
   z-index: 1;
   overflow-x: scroll;
+  user-select: none;
+  // 滚动条
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
 }
