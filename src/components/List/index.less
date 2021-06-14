@@ -32,12 +32,14 @@
     &.content {
       font-size: 15px;
       border-radius: 10px;
+      transition: background-color 300ms;
       &:hover {
         background-color: #eee;
       }
       .item {
         &.title3 > span {
           color: #bbb;
+          transition: color 300ms;
           &:hover {
             cursor: default;
             color: #bbb;
@@ -48,6 +50,7 @@
             color: @green;
           }
           user-select: none;
+          transition: color 300ms;
           &:hover {
             cursor: pointer;
             color: @green;
@@ -58,6 +61,7 @@
             color: @green;
           }
           user-select: none;
+          transition: color 300ms;
           &:hover {
             cursor: pointer;
             color: @green;
@@ -68,6 +72,7 @@
             color: @green;
           }
           & > span > span {
+            transition: color 300ms;
             &:hover {
               cursor: pointer;
               color: @green;
