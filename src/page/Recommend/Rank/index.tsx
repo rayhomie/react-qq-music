@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
 import useRecom from '@/model/recommend/useRecom'
+import usePlayer from '@/model/player/usePlayer'
 import RankCard from '@/components/RankCard'
 import { getRanks } from '@/api/recommend'
 import { getAlbumInfo } from '@/api/album'
@@ -11,6 +12,7 @@ interface RankProps {}
 const Rank: FC<RankProps> = props => {
   const history = useHistory()
   const { allRecommend } = useRecom()
+  const { setCurSong, setPlaylist } = usePlayer()
   const [info, setInfo] = useState<any>([])
   const [drag, setDrag] = useState<boolean>(false)
   const [dragCur, setDragCur] = useState<number>(0)
@@ -33,14 +35,22 @@ const Rank: FC<RankProps> = props => {
       data: {
         response: {
           detail: {
-            data,
-            // : {
-            //   data: { song },
-            // },
+            data: {
+              data: { song },
+            },
           },
         },
       },
     } = await getRanks({ topId, page: 1, limit: 100 })
+    const {
+      data: {
+        response: {
+          data: { list },
+        },
+      },
+    } = await getAlbumInfo({ albummid: song[0].albumMid })
+    setPlaylist(list)
+    setCurSong(list?.[0].songmid)
   }
 
   const mouseDown = (e: any) => {
