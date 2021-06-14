@@ -18,7 +18,6 @@ const Rank: FC<RankProps> = props => {
 
   useEffect(() => {
     setInfo(allRecommend?.toplist.data.group)
-    console.log(allRecommend?.toplist.data.group)
   }, [allRecommend])
 
   const clickSong = (mid: string) => {
@@ -42,7 +41,6 @@ const Rank: FC<RankProps> = props => {
         },
       },
     } = await getRanks({ topId, page: 1, limit: 100 })
-    console.log(data)
   }
 
   const mouseDown = (e: any) => {
@@ -61,7 +59,6 @@ const Rank: FC<RankProps> = props => {
     if (!drag) return
     const horizontal = e.clientX - container.current.offsetLeft
     const vertical = e.clientY - container.current.offsetTop
-    console.log(container.current.clientWidth)
     if (
       horizontal <= 0 ||
       horizontal >= container.current.clientWidth ||
