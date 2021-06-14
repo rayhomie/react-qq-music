@@ -69,7 +69,7 @@ const Rank: FC<RankProps> = props => {
       return
     }
     container.current.style.cursor = 'pointer'
-    const move = (e.clientX - dragCur) / 10
+    const move = -(e.clientX - dragCur) / 10
     if (container.current.scrollLeft >= 0 && container.current.scrollLeft <= 8540) {
       container.current.scrollLeft += move
     }
