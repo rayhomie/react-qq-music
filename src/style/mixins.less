@@ -130,6 +130,61 @@
   }
 }
 
+
+.songmodal(  
+  @direction: songmodal,
+  @delay: 500ms,
+  @transform: translateY(-400px),
+  @offset: 0
+) {
+  .@{direction}-appear-done{
+    position:fixed;
+    right: 0;
+    top:0;
+    z-index: 900;
+  }
+  .@{direction}-enter-done{
+    position:fixed;
+    right: 0;
+    top:0;
+    z-index: 900;
+  }
+  .@{direction}-enter { 
+    position:fixed;
+    right: 0;
+    top:0;
+    z-index: 900;
+    // opacity: 0;
+    transform: @transform;
+  }
+  .@{direction}-enter-active {
+    position:fixed;
+    right: 0;
+    top:0;
+    z-index: 900;
+    // opacity: 1;
+    transform: translateY(0);
+    transition: opacity @delay, transform @delay;
+  }
+  .@{direction}-exit {
+    position:fixed;
+    right: 0;
+    top:0;
+    z-index: 900;
+    // opacity: 1;
+  }
+  .@{direction}-exit-active {
+    position:fixed;
+    right: 0;
+    top:0;
+    z-index: 900;
+    // opacity: 0;
+    transform: @transform;
+    transition: opacity @delay, transform @delay;
+  }
+}
+
+
 .rank(  
   @direction: rank,
   @startscale: scale(0),

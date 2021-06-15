@@ -8,14 +8,16 @@ const usePlayer = () => {
   const [playlist, setPlaylist] = useState<any[]>([])
   // 当前播放歌曲
   const [curSong, setCurSong] = useState<any>(null)
-  //打开播放列表
+  // 打开播放列表
   const [openPlaylist, setOpenPlaylist] = useState<boolean>(false)
-  //音量
+  // 音量
   const [volume, setVolume] = useState<number>(1)
-  //循环模块
+  // 循环模块
   const [circle, setCircle] = useState<number>(0)
-  //搜索是否focus
+  // 搜索是否focus
   const [searchFocus, setSearchFocus] = useState<boolean>(false)
+  // 打开歌曲modal
+  const [openSongModal, setOpenSongModal] = useState<boolean>(false)
 
   useEffect(() => {
     setPlaylist(JSON.parse(localStorage.getItem('playlist') || '[]'))
@@ -65,6 +67,8 @@ const usePlayer = () => {
     setCircle,
     searchFocus,
     setSearchFocus,
+    openSongModal,
+    setOpenSongModal,
   }
 }
 

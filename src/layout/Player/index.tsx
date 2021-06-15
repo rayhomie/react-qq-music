@@ -28,6 +28,7 @@ const Player: FC<PlayerProps> = props => {
     setVolume,
     circle,
     setCircle,
+    setOpenSongModal,
   } = usePlayer()
   const [errorImg, setErrorImg] = useState<boolean>(false)
   const [musicUrl, setMusicUrl] = useState<string>('')
@@ -177,6 +178,10 @@ const Player: FC<PlayerProps> = props => {
     setCircle(pre => (pre === 0 ? 1 : pre === 1 ? 2 : 0))
   }
 
+  const OpenSongModal = () => {
+    setOpenSongModal(pre => !pre)
+  }
+
   return (
     <>
       <Progress progress={progress} onControl={modifyProgress} />
@@ -196,11 +201,12 @@ const Player: FC<PlayerProps> = props => {
               alt=""
               onError={() => setErrorImg(true)}
               style={!pic ? { visibility: 'hidden' } : {}}
+              onClick={OpenSongModal}
             />
           )}
         </div>
         <div className={styles.info}>
-          <div>{info?.track_info.name}</div>
+          <div onClick={OpenSongModal}>{info?.track_info.name}</div>
           {info && (
             <div>
               {info?.track_info?.singer?.map(({ name, mid }: any, _: number) => (

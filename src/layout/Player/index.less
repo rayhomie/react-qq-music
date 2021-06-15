@@ -15,6 +15,9 @@
       height: 50px;
       border-radius: 5px;
       margin: 0 10px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
   .info {
@@ -25,6 +28,11 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      transition: color 300ms;
+      &:hover {
+        cursor: pointer;
+        color: @green;
+      }
     }
     .singer {
       transition: color 300ms;

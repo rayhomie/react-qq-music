@@ -7,6 +7,7 @@ import Header from '@/layout/Header'
 import Menu from '@/layout/Menu'
 import Player from '@/layout/Player'
 import MusicListModal from '@/layout/MusicListModal'
+import SongModal from '@/layout/SongModal'
 // import Recommend from '@/page/Recommend'
 // import MusicLab from '@/page/MusicLab'
 // import Video from '@/page/Video'
@@ -70,6 +71,7 @@ const MyRouter = () => {
           <Route exact path="/Singer" component={Singer}></Route>
         </div>
         <MusicListModal />
+        <SongModal />
         <Player />
       </div>
     </BrowserRouter>
