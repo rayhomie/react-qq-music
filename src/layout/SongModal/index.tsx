@@ -103,7 +103,7 @@ const SongModal: FC<SongModalProps> = props => {
                 backgroundSize: `2000px 2000px`,
                 backgroundPosition: `center center`,
                 backgroundRepeat: `no-repeat`,
-                filter: 'blur(20px)',
+                filter: 'blur(10px)',
               }
             : {}
         }
