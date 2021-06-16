@@ -71,10 +71,12 @@ const SongModal: FC<SongModalProps> = props => {
     setOpenSongModal(false)
   }
 
-  const scrollLyric = (e: any) => {
-    console.log(scrollRef.current.scrollTop / 58)
-    const scrollIndex = Math.floor(scrollRef.current.scrollTop / 58)
+  const scrollLyric = () => {
+    const scrollIndex = Math.floor((scrollRef.current.scrollTop + 20) / 58)
     setScrollTime(lyric?.lines?.[scrollIndex]?.time)
+  }
+
+  const wheel = () => {
     if (timmer.current) {
       clearTimeout(timmer.current)
     }
@@ -158,7 +160,7 @@ const SongModal: FC<SongModalProps> = props => {
                 <i className={classnames('iconfont', 'icon-toplay')} onClick={toTime} />
               </div>
             )}
-            <div className={styles.lyric} onWheel={scrollLyric} ref={scrollRef}>
+            <div className={styles.lyric} onWheel={wheel} onScroll={scrollLyric} ref={scrollRef}>
               {lyric?.lines?.map(({ time, txt }: any, index: number) => (
                 <div
                   className={classnames(styles.item, {
