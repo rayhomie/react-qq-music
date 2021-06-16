@@ -72,6 +72,7 @@ const SongModal: FC<SongModalProps> = props => {
   }
 
   const scrollLyric = (e: any) => {
+    console.log(scrollRef.current.scrollTop / 58)
     const scrollIndex = Math.floor(scrollRef.current.scrollTop / 58)
     setScrollTime(lyric?.lines?.[scrollIndex]?.time)
     if (timmer.current) {
