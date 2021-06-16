@@ -36,6 +36,7 @@ const Player: FC<PlayerProps> = props => {
     info,
     setInfo,
     setCurTime,
+    playTime,
   } = usePlayer()
   const [musicUrl, setMusicUrl] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
@@ -72,6 +73,10 @@ const Player: FC<PlayerProps> = props => {
   useEffect(() => {
     setErrorImg(false)
   }, [pic])
+
+  useEffect(() => {
+    audio.current.currentTime = playTime
+  }, [playTime])
 
   const reset = () => {
     setMusicUrl('')

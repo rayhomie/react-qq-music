@@ -5,6 +5,7 @@ import Icon from '@/components/Icon'
 import Transition from '@/components/Transition'
 import usePlayer from '@/model/player/usePlayer'
 import { useHistory } from 'react-router-dom'
+import { s_to_hs } from '@/utils/common'
 import styles from './index.less'
 
 interface SongModalProps {}
@@ -12,8 +13,10 @@ interface SongModalProps {}
 const SongModal: FC<SongModalProps> = props => {
   const history = useHistory()
   const [scrollTime, setScrollTime] = useState<number>(0)
+  const [isScroll, setIsScroll] = useState<boolean>(false)
   const lyricRef = useRef<any>(null)
   const scrollRef = useRef<any>(null)
+  const timmer = useRef<any>(null)
   const {
     openSongModal,
     setOpenSongModal,
@@ -26,6 +29,7 @@ const SongModal: FC<SongModalProps> = props => {
     setLyric,
     info,
     curTime,
+    setPlayTime,
   } = usePlayer()
 
   useEffect(() => {
@@ -65,7 +69,20 @@ const SongModal: FC<SongModalProps> = props => {
   }
 
   const scrollLyric = (e: any) => {
-    console.log(scrollRef.current.scrollTop)
+    const scrollIndex = Math.floor((scrollRef.current.scrollTop + 20) / 58)
+    setScrollTime(lyric?.lines?.[scrollIndex]?.time)
+    if (timmer.current) {
+      clearTimeout(timmer.current)
+    }
+    setIsScroll(true)
+    let timer = setTimeout(() => {
+      setIsScroll(false)
+    }, 3000)
+    timmer.current = timer
+  }
+
+  const toTime = () => {
+    setPlayTime(scrollTime / 1000)
   }
 
   return (
@@ -130,7 +147,13 @@ const SongModal: FC<SongModalProps> = props => {
                 </span>
               </div>
             </div>
-            <div className={styles.lyric} onScroll={scrollLyric} ref={scrollRef}>
+            {isScroll && (
+              <div className={styles.pointer}>
+                <div>{s_to_hs(scrollTime / 1000)}</div>
+                <i className={classnames('iconfont', 'icon-toplay')} onClick={toTime} />
+              </div>
+            )}
+            <div className={styles.lyric} onWheel={scrollLyric} ref={scrollRef}>
               {lyric?.lines?.map(({ time, txt }: any, index: number) => (
                 <div
                   className={classnames(styles.item, {

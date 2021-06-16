@@ -28,6 +28,8 @@ const usePlayer = () => {
   const [info, setInfo] = useState<any>(null)
   // 当前播放时间
   const [curTime, setCurTime] = useState<number>(0)
+  // 滚动歌词的播放时间
+  const [playTime, setPlayTime] = useState<number>(0)
 
   useEffect(() => {
     setPlaylist(JSON.parse(localStorage.getItem('playlist') || '[]'))
@@ -91,6 +93,8 @@ const usePlayer = () => {
     setInfo,
     curTime,
     setCurTime,
+    playTime,
+    setPlayTime,
   }
 }
 

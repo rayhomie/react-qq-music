@@ -58,6 +58,7 @@
       overflow: hidden;
       padding: 10vh 70px 0 70px;
       height: calc(@songmodal-height - 38px);
+      position: relative;
       .info {
         margin: 0 10px;
         .name {
@@ -99,16 +100,38 @@
           }
         }
       }
+      .pointer {
+        position: absolute;
+        top: calc(10vh + 81px + 100px + 72px);
+        left: 420px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 16px;
+        & > div {
+          display: inline-block;
+          width: 45px;
+        }
+        & > i {
+          transition: color 300ms;
+          &:hover {
+            cursor: pointer;
+            color: @green;
+          }
+        }
+      }
       .lyric {
         padding: 100px 10px 250px 10px;
         width: 320px;
         height: calc(@songmodal-height - 38px - 91px - 10vh - 40px - 350px);
         overflow-y: scroll;
         font-size: 16px;
-        // box-shadow: 0 20px 20px #ffffff64 inset, 0 -20px 20px #ffffff64 inset;
         .item {
           margin: 40px 0;
           transition: color 300ms;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           &.active {
             color: @green;
           }
