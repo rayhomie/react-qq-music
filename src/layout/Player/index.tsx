@@ -5,6 +5,7 @@ import { s_to_hs } from '@/utils/common'
 import Progress from '@/components/Progress'
 import Icon from '@/components/Icon'
 import Volume from '@/components/Volume'
+import Transition from '@/components/Transition'
 import classnames from 'classnames'
 import usePlayer from '@/model/player/usePlayer'
 import { useHistory } from 'react-router-dom'
@@ -14,7 +15,6 @@ interface PlayerProps {}
 
 const Player: FC<PlayerProps> = props => {
   const history = useHistory()
-  const [pic, setPic] = useState<string>('')
   const [info, setInfo] = useState<any>(null)
   const {
     play,
@@ -28,12 +28,17 @@ const Player: FC<PlayerProps> = props => {
     setVolume,
     circle,
     setCircle,
+    openSongModal,
     setOpenSongModal,
+    pic,
+    setPic,
+    errorImg,
+    setErrorImg,
   } = usePlayer()
-  const [errorImg, setErrorImg] = useState<boolean>(false)
   const [musicUrl, setMusicUrl] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
   const [volumeShow, setVolumeShow] = useState<boolean>(false)
+  const [showArrow, setShowArrow] = useState<boolean>(false)
 
   const audio = useRef<any>(null)
 
@@ -182,6 +187,10 @@ const Player: FC<PlayerProps> = props => {
     setOpenSongModal(pre => !pre)
   }
 
+  const mouse = (type: boolean) => {
+    setShowArrow(type)
+  }
+
   return (
     <>
       <Progress progress={progress} onControl={modifyProgress} />
@@ -192,7 +201,11 @@ const Player: FC<PlayerProps> = props => {
         onClickOutside={() => (volumeShow ? setVolumeShow(false) : () => {})}
       />
       <div className={styles.container}>
-        <div className={styles.pic}>
+        <div
+          className={styles.pic}
+          onMouseLeave={() => mouse(false)}
+          onMouseEnter={() => mouse(true)}
+        >
           {errorImg && pic ? (
             <Icon type="icon-CD" style={{ fontSize: 50, margin: '0 10px' }} />
           ) : (
@@ -204,6 +217,19 @@ const Player: FC<PlayerProps> = props => {
               onClick={OpenSongModal}
             />
           )}
+          {
+            <Transition in={showArrow} classNames="songimg" timeout={500}>
+              <div className={styles.mask} onClick={OpenSongModal}>
+                <i
+                  className={classnames(
+                    'iconfont',
+                    `icon-dou-arrow-${openSongModal ? 'down' : 'up'}`,
+                    styles.arrowImg
+                  )}
+                />
+              </div>
+            </Transition>
+          }
         </div>
         <div className={styles.info}>
           <div onClick={OpenSongModal}>{info?.track_info.name}</div>

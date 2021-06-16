@@ -18,6 +18,10 @@ const usePlayer = () => {
   const [searchFocus, setSearchFocus] = useState<boolean>(false)
   // 打开歌曲modal
   const [openSongModal, setOpenSongModal] = useState<boolean>(false)
+  // 歌曲的专辑图
+  const [pic, setPic] = useState<string>('')
+  // 无专辑图
+  const [errorImg, setErrorImg] = useState<boolean>(false)
 
   useEffect(() => {
     setPlaylist(JSON.parse(localStorage.getItem('playlist') || '[]'))
@@ -69,6 +73,10 @@ const usePlayer = () => {
     setSearchFocus,
     openSongModal,
     setOpenSongModal,
+    pic,
+    setPic,
+    errorImg,
+    setErrorImg,
   }
 }
 

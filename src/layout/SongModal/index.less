@@ -6,4 +6,38 @@
   position: fixed;
   right: 0;
   top: 0;
+  .arrow {
+    display: block;
+    color: #60cba064;
+    transition: color 300ms;
+    font-size: 25px;
+    width: 28px;
+    margin: 10px 0 0 15px;
+    &:hover {
+      cursor: pointer;
+      color: @green;
+    }
+  }
+  .main {
+    width: 100%;
+    height: calc(@songmodal-height - 38px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .pic {
+      user-select: none;
+      & > img {
+        width: 300px;
+        height: 300px;
+        border: 6px solid #e9e9e9;
+        -webkit-user-drag: none;
+      }
+    }
+    .right {
+      width: 500px;
+      background-color: #eee;
+      height: calc(@songmodal-height - 38px);
+    }
+  }
 }

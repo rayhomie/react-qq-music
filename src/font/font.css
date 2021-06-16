@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2566083 */
-  src: url('//at.alicdn.com/t/font_2566083_n8lkhdkj9xh.woff2?t=1623483366914') format('woff2'),
-       url('//at.alicdn.com/t/font_2566083_n8lkhdkj9xh.woff?t=1623483366914') format('woff'),
-       url('//at.alicdn.com/t/font_2566083_n8lkhdkj9xh.ttf?t=1623483366914') format('truetype');
+  src: url('//at.alicdn.com/t/font_2566083_w8hh7sohwns.woff2?t=1623807766669') format('woff2'),
+       url('//at.alicdn.com/t/font_2566083_w8hh7sohwns.woff?t=1623807766669') format('woff'),
+       url('//at.alicdn.com/t/font_2566083_w8hh7sohwns.ttf?t=1623807766669') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dou-arrow-down:before {
+  content: "\e7c5";
+}
+
+.icon-dou-arrow-up-large:before {
+  content: "\e636";
+}
+
+.icon-dou-arrow-down-large:before {
+  content: "\e632";
+}
+
+.icon-dou-arrow-up:before {
+  content: "\e7c4";
 }
 
 .icon-hanhan-0:before {
