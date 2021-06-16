@@ -26,6 +26,8 @@ const usePlayer = () => {
   const [lyric, setLyric] = useState<any>({})
   // 歌曲信息
   const [info, setInfo] = useState<any>(null)
+  // 当前播放时间
+  const [curTime, setCurTime] = useState<number>(0)
 
   useEffect(() => {
     setPlaylist(JSON.parse(localStorage.getItem('playlist') || '[]'))
@@ -87,6 +89,8 @@ const usePlayer = () => {
     setLyric,
     info,
     setInfo,
+    curTime,
+    setCurTime,
   }
 }
 

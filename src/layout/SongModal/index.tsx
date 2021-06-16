@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useState, useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import { getLyric } from '@/api/music'
 import Icon from '@/components/Icon'
@@ -11,6 +11,9 @@ interface SongModalProps {}
 
 const SongModal: FC<SongModalProps> = props => {
   const history = useHistory()
+  const [scrollTime, setScrollTime] = useState<number>(0)
+  const lyricRef = useRef<any>(null)
+  const scrollRef = useRef<any>(null)
   const {
     openSongModal,
     setOpenSongModal,
@@ -22,6 +25,7 @@ const SongModal: FC<SongModalProps> = props => {
     lyric,
     setLyric,
     info,
+    curTime,
   } = usePlayer()
 
   useEffect(() => {
@@ -42,6 +46,10 @@ const SongModal: FC<SongModalProps> = props => {
     }
   }
 
+  useEffect(() => {
+    lyricRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }, [lyricRef.current])
+
   const clickArrow = () => {
     setOpenSongModal(false)
   }
@@ -54,6 +62,10 @@ const SongModal: FC<SongModalProps> = props => {
   const clickAlbum = (mid: string) => {
     history.push('/Album', { remoteplace: 'album', mid })
     setOpenSongModal(false)
+  }
+
+  const scrollLyric = (e: any) => {
+    console.log(scrollRef.current.scrollTop)
   }
 
   return (
@@ -118,9 +130,20 @@ const SongModal: FC<SongModalProps> = props => {
                 </span>
               </div>
             </div>
-            <div className={styles.lyric}>
-              {lyric?.lines?.map(({ time, txt }: any) => (
-                <div className={styles.item} key={time}>
+            <div className={styles.lyric} onScroll={scrollLyric} ref={scrollRef}>
+              {lyric?.lines?.map(({ time, txt }: any, index: number) => (
+                <div
+                  className={classnames(styles.item, {
+                    [styles.active]:
+                      curTime >= time && curTime <= (lyric?.lines?.[index + 1]?.time || 99999999),
+                  })}
+                  key={time}
+                  ref={
+                    curTime >= time && curTime <= (lyric?.lines?.[index + 1]?.time || 99999999)
+                      ? lyricRef
+                      : null
+                  }
+                >
                   {txt}
                 </div>
               ))}

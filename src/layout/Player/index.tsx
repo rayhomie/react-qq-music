@@ -35,6 +35,7 @@ const Player: FC<PlayerProps> = props => {
     setErrorImg,
     info,
     setInfo,
+    setCurTime,
   } = usePlayer()
   const [musicUrl, setMusicUrl] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
@@ -259,9 +260,10 @@ const Player: FC<PlayerProps> = props => {
             ref={audio}
             autoPlay
             src={musicUrl}
-            onTimeUpdate={() =>
+            onTimeUpdate={() => {
               setProgress(audio.current.currentTime / audio.current.duration || 0)
-            }
+              setCurTime(audio.current.currentTime * 1000)
+            }}
             onLoad={e => {
               console.log(e)
             }}
