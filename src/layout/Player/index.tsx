@@ -15,7 +15,6 @@ interface PlayerProps {}
 
 const Player: FC<PlayerProps> = props => {
   const history = useHistory()
-  const [info, setInfo] = useState<any>(null)
   const {
     play,
     setPlay,
@@ -34,6 +33,8 @@ const Player: FC<PlayerProps> = props => {
     setPic,
     errorImg,
     setErrorImg,
+    info,
+    setInfo,
   } = usePlayer()
   const [musicUrl, setMusicUrl] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
@@ -218,7 +219,7 @@ const Player: FC<PlayerProps> = props => {
             />
           )}
           {
-            <Transition in={showArrow} classNames="songimg" timeout={500}>
+            <Transition in={curSong && showArrow} classNames="songimg" timeout={500}>
               <div className={styles.mask} onClick={OpenSongModal}>
                 <i
                   className={classnames(

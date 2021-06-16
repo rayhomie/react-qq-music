@@ -7,6 +7,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  position: relative;
+  z-index: 1000;
   .pic {
     & > img {
       user-select: none;
@@ -46,7 +48,7 @@
     width: @player-info-width;
     line-height: 24px;
     & > div {
-      width: 300px;
+      width: 15vw;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -56,13 +58,20 @@
         color: @green;
       }
     }
-    .singer {
-      transition: color 300ms;
-      &:hover {
-        cursor: pointer;
-        color: @green;
+    .singers {
+      width: 15vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      .singer {
+        transition: color 300ms;
+        &:hover {
+          cursor: pointer;
+          color: @green;
+        }
       }
     }
+
     div:last-child {
       color: #7d7d7d;
     }

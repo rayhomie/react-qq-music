@@ -22,6 +22,10 @@ const usePlayer = () => {
   const [pic, setPic] = useState<string>('')
   // 无专辑图
   const [errorImg, setErrorImg] = useState<boolean>(false)
+  // 歌词
+  const [lyric, setLyric] = useState<any>({})
+  // 歌曲信息
+  const [info, setInfo] = useState<any>(null)
 
   useEffect(() => {
     setPlaylist(JSON.parse(localStorage.getItem('playlist') || '[]'))
@@ -50,6 +54,8 @@ const usePlayer = () => {
 
   useEffect(() => {
     localStorage.setItem('curSong', curSong || '')
+    // 当切歌时收起歌的modal
+    setOpenSongModal(false)
   }, [curSong])
 
   useEffect(() => {
@@ -77,6 +83,10 @@ const usePlayer = () => {
     setPic,
     errorImg,
     setErrorImg,
+    lyric,
+    setLyric,
+    info,
+    setInfo,
   }
 }
 

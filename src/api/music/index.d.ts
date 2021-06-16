@@ -1,6 +1,6 @@
 export type getLyricPayload = {
-  songmid: number // 专辑id
-  isFormat: boolean // 是否格式化歌词, 默认值为 false
+  songmid: number | string // 专辑id
+  isFormat?: boolean // 是否格式化歌词, 默认值为 false
 }
 
 export type getMvPayload = {

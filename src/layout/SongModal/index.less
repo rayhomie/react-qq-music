@@ -1,11 +1,21 @@
 @import '@/style/variables.less';
-.container {
+.bgc {
   width: @songmodal-width;
   height: @songmodal-height;
-  background-color: @songmodal-bg-color;
+  overflow: hidden;
   position: fixed;
   right: 0;
   top: 0;
+}
+.container {
+  width: @songmodal-width;
+  height: @songmodal-height;
+  position: fixed;
+  right: 0;
+  top: 0;
+  &.noPicBg {
+    background-color: #fff;
+  }
   .arrow {
     display: block;
     color: #60cba064;
@@ -33,11 +43,99 @@
         border: 6px solid #e9e9e9;
         -webkit-user-drag: none;
       }
+      & > span {
+        display: block;
+        width: 300px;
+        height: 300px;
+        border: 6px solid #e9e9e9;
+        -webkit-user-drag: none;
+      }
     }
     .right {
       width: 500px;
-      background-color: #eee;
+      box-sizing: border-box;
+      // background-color: #eee;
+      overflow: hidden;
+      padding: 10vh 70px 0 70px;
       height: calc(@songmodal-height - 38px);
+      .info {
+        margin: 0 10px;
+        .name {
+          width: 340px;
+          font-size: 22px;
+          margin-bottom: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .singerinfo {
+          width: 340px;
+          font-size: 16px;
+          margin-bottom: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          .singer {
+            transition: color 300ms;
+            &:hover {
+              cursor: pointer;
+              color: @green;
+            }
+          }
+        }
+        .album {
+          width: 340px;
+          font-size: 16px;
+          margin-bottom: 30px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          span:last-child {
+            transition: color 300ms;
+            &:hover {
+              cursor: pointer;
+              color: @green;
+            }
+          }
+        }
+      }
+      .lyric {
+        padding: 0 10px;
+        width: 320px;
+        height: calc(@songmodal-height - 38px - 91px - 10vh - 40px);
+        overflow-y: scroll;
+        font-size: 16px;
+        // box-shadow: 0 20px 20px #ffffff64 inset, 0 -20px 20px #ffffff64 inset;
+        .item {
+          margin: 40px 0;
+        }
+        // 滚动条
+        &::-webkit-scrollbar-track {
+          display: none;
+        }
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-height: 500px) {
+  .container {
+    .main {
+      .pic {
+        & > img {
+          width: 200px;
+          height: 200px;
+          border: 6px solid #e9e9e9;
+          -webkit-user-drag: none;
+        }
+      }
     }
   }
 }
