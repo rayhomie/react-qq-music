@@ -23,7 +23,7 @@ const usePlayer = () => {
   // 无专辑图
   const [errorImg, setErrorImg] = useState<boolean>(false)
   // 歌词
-  const [lyric, setLyric] = useState<any>({})
+  const [lyric, setLyric] = useState<any>(null)
   // 歌曲信息
   const [info, setInfo] = useState<any>(null)
   // 当前播放时间

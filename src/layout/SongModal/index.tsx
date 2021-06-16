@@ -44,11 +44,14 @@ const SongModal: FC<SongModalProps> = props => {
         },
       } = await getLyric(param)
       setLyric(lyric)
-      console.log(lyric)
     } catch (err) {
-      setLyric({})
+      setLyric(null)
     }
   }
+
+  useEffect(() => {
+    console.log(lyric)
+  }, [lyric])
 
   useEffect(() => {
     lyricRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -69,7 +72,7 @@ const SongModal: FC<SongModalProps> = props => {
   }
 
   const scrollLyric = (e: any) => {
-    const scrollIndex = Math.floor((scrollRef.current.scrollTop + 20) / 58)
+    const scrollIndex = Math.floor(scrollRef.current.scrollTop / 58)
     setScrollTime(lyric?.lines?.[scrollIndex]?.time)
     if (timmer.current) {
       clearTimeout(timmer.current)
@@ -83,6 +86,7 @@ const SongModal: FC<SongModalProps> = props => {
 
   const toTime = () => {
     setPlayTime(scrollTime / 1000)
+    setIsScroll(false)
   }
 
   return (
@@ -147,7 +151,7 @@ const SongModal: FC<SongModalProps> = props => {
                 </span>
               </div>
             </div>
-            {isScroll && (
+            {lyric?.lines?.length > 0 && isScroll && (
               <div className={styles.pointer}>
                 <div>{s_to_hs(scrollTime / 1000)}</div>
                 <i className={classnames('iconfont', 'icon-toplay')} onClick={toTime} />
@@ -158,11 +162,11 @@ const SongModal: FC<SongModalProps> = props => {
                 <div
                   className={classnames(styles.item, {
                     [styles.active]:
-                      curTime >= time && curTime <= (lyric?.lines?.[index + 1]?.time || 99999999),
+                      curTime >= time && curTime < (lyric?.lines?.[index + 1]?.time || 99999999),
                   })}
                   key={time}
                   ref={
-                    curTime >= time && curTime <= (lyric?.lines?.[index + 1]?.time || 99999999)
+                    curTime >= time && curTime < (lyric?.lines?.[index + 1]?.time || 99999999)
                       ? lyricRef
                       : null
                   }
