@@ -59,7 +59,7 @@ const usePlayer = () => {
   useEffect(() => {
     localStorage.setItem('curSong', curSong || '')
     // 当切歌时收起歌的modal
-    setOpenSongModal(false)
+    // setOpenSongModal(false)
   }, [curSong])
 
   useEffect(() => {
