@@ -271,9 +271,6 @@ const Player: FC<PlayerProps> = props => {
               setProgress(audio.current.currentTime / audio.current.duration || 0)
               setCurTime(audio.current.currentTime * 1000)
             }}
-            onLoad={e => {
-              console.log(e)
-            }}
             onEnded={() => musicEnd()}
           >
             您的浏览器不支持 audio 元素。

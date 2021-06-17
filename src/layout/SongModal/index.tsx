@@ -50,10 +50,6 @@ const SongModal: FC<SongModalProps> = props => {
   }
 
   useEffect(() => {
-    console.log(lyric)
-  }, [lyric])
-
-  useEffect(() => {
     lyricRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }, [lyricRef.current])
 

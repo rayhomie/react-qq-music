@@ -115,9 +115,6 @@ const Album: FC<AlbumProps> = props => {
           onClickSinger={id => {
             history.push('/Singer', { remoteplace: 'singer', mid: id })
           }}
-          onClickAlbum={id => {
-            console.log(id)
-          }}
           currentSongId={curSong}
         />
       )}

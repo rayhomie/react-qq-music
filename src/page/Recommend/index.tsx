@@ -44,7 +44,11 @@ const Recommend: FC<RecommendProps> = props => {
 
   return (
     <div className={styles.container}>
-      <RecomTab onChange={(key, label) => tabChange(key, label)} defaultActiveKey={active} />
+      <RecomTab
+        onChange={(key, label) => tabChange(key, label)}
+        defaultActiveKey={active}
+        activeKey={active}
+      />
       {TabMap[active]}
     </div>
   )

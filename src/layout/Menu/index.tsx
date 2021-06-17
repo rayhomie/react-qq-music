@@ -8,17 +8,20 @@ import styles from './index.less'
 import CONST from '@/const'
 import { router } from '@/router'
 import useApp from '@/model/app/useApp'
+import usePlayer from '@/model/player/usePlayer'
 
 interface MenuProps {}
 
 const Menu: FC<MenuProps> = props => {
   const { sideId, setSideId, nav, setNav } = useApp()
+  const { setOpenSongModal } = usePlayer()
   const history = useHistory()
 
   //选择侧边栏
   const handleSelect = (id: number) => {
     setSideId(id)
     setNav(0)
+    setOpenSongModal(false)
   }
 
   //侧边栏变化
