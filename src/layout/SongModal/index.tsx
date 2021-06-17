@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
+import React, { FC, useState, useEffect, useRef, useMemo } from 'react'
 import classnames from 'classnames'
 import { getLyric } from '@/api/music'
 import Icon from '@/components/Icon'
@@ -92,22 +92,54 @@ const SongModal: FC<SongModalProps> = props => {
     setIsScroll(false)
   }
 
+  const bcg = useMemo(
+    () => (
+      <>
+        <div
+          className={styles.bgc}
+          style={
+            pic && !errorImg
+              ? {
+                  background: `url('${pic}')`,
+                  backgroundSize: `1600px 1600px`,
+                  backgroundPosition: `center center`,
+                  backgroundRepeat: `no-repeat`,
+                  filter: 'blur(50px)',
+                }
+              : {}
+          }
+        ></div>
+        {/* 解决高斯模糊透视问题 */}
+        <div
+          className={styles.bgc}
+          style={
+            pic && !errorImg
+              ? {
+                  backgroundColor: '#ffffff',
+                  zIndex: -1,
+                }
+              : {}
+          }
+        ></div>
+        {/* 白色为基准色调 */}
+        <div
+          className={styles.bgc}
+          style={
+            pic && !errorImg
+              ? {
+                  backgroundColor: '#ffffff80',
+                }
+              : {}
+          }
+        ></div>
+      </>
+    ),
+    [pic, errorImg]
+  )
+
   return (
     <Transition in={openSongModal} classNames="songmodal" timeout={500}>
-      <div
-        className={styles.bgc}
-        style={
-          pic && !errorImg
-            ? {
-                background: `url('${pic}')`,
-                backgroundSize: `2000px 2000px`,
-                backgroundPosition: `center center`,
-                backgroundRepeat: `no-repeat`,
-                filter: 'blur(10px)',
-              }
-            : {}
-        }
-      ></div>
+      {bcg}
       <div className={classnames(styles.container, { [styles.noPicBg]: errorImg })}>
         <i
           className={classnames('iconfont', 'icon-arrow-down', styles.arrow)}

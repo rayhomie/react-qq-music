@@ -198,6 +198,11 @@ const Player: FC<PlayerProps> = props => {
     setShowArrow(type)
   }
 
+  const clickSinger = (mid: string) => {
+    history.push('/Singer', { remoteplace: 'singer', mid })
+    setOpenSongModal(false)
+  }
+
   return (
     <>
       <Progress progress={progress} onControl={modifyProgress} />
@@ -244,10 +249,7 @@ const Player: FC<PlayerProps> = props => {
             <div>
               {info?.track_info?.singer?.map(({ name, mid }: any, _: number) => (
                 <span key={_} className={styles.singers}>
-                  <span
-                    className={styles.singer}
-                    onClick={() => history.push('/Singer', { remoteplace: 'singer', mid })}
-                  >
+                  <span className={styles.singer} onClick={() => clickSinger(mid)}>
                     {name}
                   </span>
                   {info?.track_info?.singer.length !== 1 &&
