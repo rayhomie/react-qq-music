@@ -3,12 +3,13 @@ import { getSongInfo as fetchSongInfo, getMusicPlay as fetchMusicPlay } from '@/
 import { getImageUrl } from '@/api/recommend'
 import { s_to_hs } from '@/utils/common'
 import Progress from '@/components/Progress'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 import Icon from '@/components/Icon'
 import Volume from '@/components/Volume'
 import Transition from '@/components/Transition'
+import useMsg from '@/model/msg/useMsg'
 import classnames from 'classnames'
 import usePlayer from '@/model/player/usePlayer'
-import { message } from 'antd'
 import { useHistory } from 'react-router-dom'
 import styles from './index.less'
 
@@ -39,6 +40,7 @@ const Player: FC<PlayerProps> = props => {
     setCurTime,
     playTime,
   } = usePlayer()
+  const { setConfig } = useMsg()
   const [musicUrl, setMusicUrl] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
   const [volumeShow, setVolumeShow] = useState<boolean>(false)
@@ -115,11 +117,18 @@ const Player: FC<PlayerProps> = props => {
     for (let item in playUrl) {
       setMusicUrl(playUrl[item].url)
       if (playUrl[item].error) {
-        message.warn({
-          content: `${playUrl[item].error}，1s后跳至下一首`,
-          duration: 1,
+        setConfig(pre => ({
+          ...pre,
+          content: (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <ExclamationCircleOutlined style={{ marginRight: 10, color: '#FF7F00' }} />
+              {`${playUrl[item].error}，2s后播放下一首`}
+            </div>
+          ),
+          show: true,
+          delay: 2000,
           onClose: nextMusic,
-        })
+        }))
       }
     }
   }

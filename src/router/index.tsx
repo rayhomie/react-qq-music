@@ -8,6 +8,7 @@ import Menu from '@/layout/Menu'
 import Player from '@/layout/Player'
 import MusicListModal from '@/layout/MusicListModal'
 import SongModal from '@/layout/SongModal'
+import Message from '@/components/Message'
 // import Recommend from '@/page/Recommend'
 // import MusicLab from '@/page/MusicLab'
 // import Video from '@/page/Video'
@@ -73,6 +74,7 @@ const MyRouter = () => {
         <MusicListModal />
         <SongModal />
         <Player />
+        <Message />
       </div>
     </BrowserRouter>
   )

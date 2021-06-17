@@ -246,3 +246,49 @@
     transition: opacity 300ms, transform 300ms;
   }
 }
+
+
+.message(  
+  @direction: message,
+  @startscale: scale(0),
+  @endscale: scale(1)
+) {
+  .@{direction}-enter { 
+    position: absolute;
+    z-index: 99999999;
+    top: 50vh;
+    left: 50vw;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  }
+  .@{direction}-enter-active {
+    position: absolute;
+    z-index: 99999999;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);  
+    opacity: 1;
+    transition: opacity 300ms, transform 300ms; 
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  }
+  .@{direction}-exit {
+    position: absolute;
+    z-index: 99999999;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);  
+    opacity: 1;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  }
+  .@{direction}-exit-active {
+    position: absolute;
+    z-index: 99999999;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);  
+    opacity: 0;
+    transition: opacity 300ms, transform 300ms;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  }
+}
