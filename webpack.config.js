@@ -121,6 +121,7 @@ module.exports = {
               modules: {
                 localIdentName: '[hash:base64:8]',
               },
+              // javascriptEnabled: true,
             },
           },
           'postcss-loader',

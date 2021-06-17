@@ -8,6 +8,7 @@ import Volume from '@/components/Volume'
 import Transition from '@/components/Transition'
 import classnames from 'classnames'
 import usePlayer from '@/model/player/usePlayer'
+import { message } from 'antd'
 import { useHistory } from 'react-router-dom'
 import styles from './index.less'
 
@@ -114,8 +115,11 @@ const Player: FC<PlayerProps> = props => {
     for (let item in playUrl) {
       setMusicUrl(playUrl[item].url)
       if (playUrl[item].error) {
-        alert(playUrl[item].error)
-        nextMusic()
+        message.warn({
+          content: `${playUrl[item].error}，1s后跳至下一首`,
+          duration: 1,
+          onClose: nextMusic,
+        })
       }
     }
   }
