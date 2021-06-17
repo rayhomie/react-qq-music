@@ -194,6 +194,7 @@ const SongModal: FC<SongModalProps> = props => {
                   className={classnames(styles.item, {
                     [styles.active]:
                       curTime >= time && curTime < (lyric?.lines?.[index + 1]?.time || 99999999),
+                    [styles.last]: lyric?.lines?.length - 1 === index,
                   })}
                   key={time}
                   ref={
