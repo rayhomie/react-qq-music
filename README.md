@@ -35,7 +35,7 @@ https://rain120.github.io/qq-music-api/#/?id=qqmusicapi
 |-- src              // 源码目录 
 |   |-- api          // QQ音乐Api目录   
 |   |-- components   // 组件目录
-|		|-- fon          // iconfont图标字体目录
+|		|-- font         // iconfont图标字体目录
 |   |-- hooks        // 自定义hooks工具目录
 |		|-- layout       // 整体页面布局目录
 |   |-- model        // 全局状态hox目录
