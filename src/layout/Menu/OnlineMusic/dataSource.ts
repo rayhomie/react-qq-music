@@ -8,12 +8,12 @@ export const dataSource: DataType[] = [
     iconfont: 'icon-recommend',
     show: true,
   },
-  {
-    label: CONST['MUSIC_LAB'],
-    id: 1,
-    iconfont: 'icon-music',
-    show: true,
-  },
+  // {
+  //   label: CONST['MUSIC_LAB'],
+  //   id: 1,
+  //   iconfont: 'icon-music',
+  //   show: true,
+  // },
   // {
   //   label: CONST['VIDEO'],
   //   id: 2,
