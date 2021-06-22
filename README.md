@@ -59,6 +59,41 @@ https://rain120.github.io/qq-music-api/#/?id=qqmusicapi
 |-- webpack.config.js      // webpack打包入口配置文件			 
 ```
 
+### 进度
+
+- [x] 搜索建议
+- [x] 搜索详情页
+- [x] 歌手页
+- [x] 专辑页
+- [x] 播放音乐（版权歌曲无法播放）
+- [x] 播放列表（支持本地存储当前列表）
+- [x] 播放模式（单曲循环、列表循环、随机播放）
+- [x] 调整音量
+- [x] 查看歌词
+- [x] 歌单推荐
+- [x] 新歌首发
+- [x] 精彩推荐
+- [x] 新碟首发
+- [x] 排行榜
+- [ ] 音乐馆
+- [ ] MV
+- [ ] 电台
+- [ ] 主题换肤
+
+### 效果截屏
+
+![歌单推荐](https://personal-financ.oss-cn-chengdu.aliyuncs.com/qqmusic/Snipaste_2021-06-22_21-45-20.png)
+
+![歌词](https://personal-financ.oss-cn-chengdu.aliyuncs.com/qqmusic/Snipaste_2021-06-22_21-45-59.png)
+
+![排行榜](https://personal-financ.oss-cn-chengdu.aliyuncs.com/qqmusic/Snipaste_2021-06-22_21-46-49.png)
+
+![新碟首发](https://personal-financ.oss-cn-chengdu.aliyuncs.com/qqmusic/Snipaste_2021-06-22_21-47-18.png)
+
+![新歌首发](https://personal-financ.oss-cn-chengdu.aliyuncs.com/qqmusic/Snipaste_2021-06-22_21-47-47.png)
+
+
+
 ### 安装与使用
 
 ```bash
@@ -72,5 +107,7 @@ npm run dll
 npm run build
 ```
 
-### 
+
+
+
 
