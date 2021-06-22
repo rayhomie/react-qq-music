@@ -35,6 +35,23 @@ https://rain120.github.io/qq-music-api/#/?id=qqmusicapi
 |-- src              // 源码目录 
 |   |-- api          // QQ音乐Api目录   
 |   |-- components   // 组件目录
+|       |--Button         // 按钮组件
+|       |--Card           // 常规的专辑等卡片
+|       |--CardList       // 歌单推荐的卡片列表
+|       |--Icon           // 包裹使用@ant-design/icons和IconFont
+|       |--List           // 歌曲列表组件
+|       |--MacBtn         // mac按钮组件
+|       |--Message        // 全局提示
+|       |--Pagination     // 分页组件
+|       |--PlayListModal  // 播放列表弹窗
+|       |--Progress       // 播放的进度
+|       |--RankCard       // 排行榜卡片
+|       |--Search         // 搜索框（包含业务）
+|       |--SideBar        // 侧边栏
+|       |--SingerCard     // 歌手卡片
+|       |--Tab            // 标签组件
+|       |--Transition     // 动画过渡组件透传CSSTransition所有属性
+|       |--Volume         // 音量组件
 |   |-- font         // iconfont图标字体目录
 |   |-- hooks        // 自定义hooks工具目录
 |   |-- layout       // 整体页面布局目录
