@@ -38,6 +38,11 @@ https://rain120.github.io/qq-music-api/#/?id=qqmusicapi
 |   |-- font         // iconfont图标字体目录
 |   |-- hooks        // 自定义hooks工具目录
 |   |-- layout       // 整体页面布局目录
+|       |--Header           // 路由前进后退按钮、搜索框
+|       |--Menu             // 左侧菜单栏
+|       |--MusicListModal   // 播放列表侧弹窗
+|       |--Player           // 播放器模块
+|       |--SongModal        // 歌词弹窗
 |   |-- model        // 全局状态hox目录
 |   |-- page         // 页面目录
 |   |-- router       // 路由配置目录（可动态加载）
