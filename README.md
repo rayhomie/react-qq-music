@@ -1,4 +1,4 @@
-# 🎵 基于 React 的高仿QQ音乐 mac 客户端播放器（PC） Online Music Player
+# 🎵 基于 React 的QQ音乐 mac 客户端播放器（PC） Online Music Player
 
 由于之前在github上看到了一个高仿mac版网易云客户端播放器的项目。由于在github上目前还没有高仿mac版QQ音乐的项目。
 
